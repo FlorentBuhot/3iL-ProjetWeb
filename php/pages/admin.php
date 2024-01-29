@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start();vcv
     if($_SESSION['droit'] != 'admin'){
         header("location:/index.php");
     };
