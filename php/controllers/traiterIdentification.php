@@ -15,7 +15,7 @@
 
     // Pas reçues, ou "vide" : on sort
     if (empty($_REQUEST['login']) || empty($_REQUEST['pass'])){
-        header('Location:/index.php?msg=Champ manquant');
+        header('Location:/php/pages/connection.php?msg=Champ manquant');
         exit(); // header ne provoque pas l'arrêt du script
     }
 
@@ -25,45 +25,37 @@
 
     //Requete de sélection pour tester
     //Création du texte de la requête
-    $texteReq = "select droits, pass ";
+    $texteReq = "select role, password ";
     $texteReq .= "from users ";
-    $texteReq .= "where login =:log";
+    $texteReq .= "where login = :log";
 
     //demander la creation de la requete à l'instance PDO ($cnx)
 
     $requete = $cnx->prepare($texteReq);
     $requete->bindParam(':log', $login);
 
-    //Execution de la requete
-    try {
-        $requete->execute();
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-        exit();
-    }
+    //Execution de la requête
+    $requete->execute();
     $tabRes = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-    if (count($tabRes) != 1) {
-        die("Login / pass non trouvé");
+    if (count($tabRes) != 1 || !password_verify($pass, $tabRes[0]["password"])) {
+        header('Location:/php/pages/connection.php?msg=Login ou mot de passe incorrect');
+        exit();
     }
 
-    if (!password_verify($pass, $tabRes[0]["pass"])) {
-        die("mauvais password");
-    }
-
-    $droits = $tabRes[0]["droits"];
+    $droit = $tabRes[0]["role"];
     $_SESSION["login"] = $login;
-    $_SESSION["droit"] = $droits;
+    $_SESSION["droit"] = $droit;
 
-    if ($droits=="admin"){
+    if ($droit == "admin"){
         header("Location:/php/pages/admin.php");
         exit();
-    } elseif ($droits == "etudiant"){
+    } elseif ($droit == "joueur"){
         // rediriger vers la pages d'affichage du profil de l'étudiant zoe
-        header("Location:/php/pages/profil.php");
+        header("Location:/php/pages/joueur.php");
         exit();
     } else {
         // si pas connu : rediriger sur l'accueil (index.php)
-        header("location:/index.php");
+        header('Location:/php/pages/connection.php');
         exit();
     }

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if($_SESSION['droit'] != 'chef'){
+    if($_SESSION['droit'] != 'admin'){
         header("location:/index.php");
     };
 ?>
