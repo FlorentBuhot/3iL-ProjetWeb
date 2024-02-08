@@ -10,39 +10,39 @@
     <?php
         include_once("../template/inc_headers.php");
     ?>
-    <title>Admin</title>
+   <title>Admin</title>
 </head>
 <body class="container">
-    <h1>Gestion des bonus/malus</h1>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nom</th>
-                <th>prenom</th>
-                <th>voir</th>
-                <th>edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>K</td>
-                <td>Walid</td>
-                <td>-2</td>
-                <?php // voir https://icons.getbootstrap.com/ pour les icones (avec le css inclus via cdn ci-dessus) ?>
-                <td><i class="bi-search text-primary"></i></td>
-                <td><i class="bi-pencil text-danger"></i></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>R</td>
-                <td>Ingrid</td>
-                <td>0.01</td>
-                <td><i class="bi-search text-primary"></i></td>
-                <td><i class="bi-pencil text-danger"></i></td>
-            </tr>
-        </tbody>
-    </table>
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Features</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Pricing</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 </body>
 </html>

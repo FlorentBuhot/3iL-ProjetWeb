@@ -5,32 +5,39 @@
     <?php
     include_once("/var/www/html/php/template/inc_headers.php");
     ?>
-    <title>Accueil</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page de connexion</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body class="container">
-<h1>Bienvenue !</h1>
-<p>Merci de vous identifier pour accéder à l'application.</p>
-<form action="/php/controllers/traiterIdentification.php" method="post">
-    <p class="text-danger">
-        <?php
-        if (isset($_GET['msg'])) {
-            echo $_GET['msg'];
-        }
-        ?>
-    </p>
-    <div>
-        <label for="inLogin">Login : </label>
-        <input class="form-control" id="inLogin" name="login" type="text" placeholder="Identifiant">
+<div id="login_form">
+    <div id="block-connect">
+        <p class="text-danger">
+            <?php
+            if (isset($_GET['msg'])) {
+                echo $_GET['msg'];
+            }
+            ?>
+        </p>
     </div>
-    <div>
-        <label for="inPass">Mot de passe : </label>
-        <input class="form-control" id="inPass" name="pass" type="password" placeholder="Respecter les majuscules/minuscules">
-    </div>
-
-    <div class="mt-2">
-        <button class="btn btn-success" type="submit">OK</button>
-        <button class="btn btn-warning" type="reset">Effacer</button>
-    </div>
-</form>
+    <form class="p-5" action="/php/controllers/traiterIdentification.php" method="post">
+        <h1 class="fw-bold">S'identifier</h1>
+        <div class="form-group">
+            <input class="form-control mb-2 p-2" id="inLogin" name="login" type="text"
+                   placeholder="Saisissez votre adresse email">
+        </div>
+        <div class="form-group">
+            <input class="form-control p-2" id="inPass" name="pass" type="password"
+                   placeholder="Entrez votre mot de passe">
+        </div>
+        <div class="mt-2 w-10">
+            <button class="btn btn-success w-100" type="submit">S'identifier</button>
+        </div>
+        <p>Vous n'avez pas de compte ? <a class="style_a" href="/php/pages/inscription.php">Inscrivez-vous</a></p>
+    </form>
+</div>
 </body>
 </html>
