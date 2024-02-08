@@ -3,7 +3,7 @@
 
 <head>
     <?php
-        include_once("php/template/inc_headers.php");
+        include_once("php/template/inc_head.php");
     ?>
     <title>Accueil</title>
 </head>

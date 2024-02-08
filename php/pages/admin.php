@@ -1,48 +1,85 @@
 <?php
-    session_start();
-    if($_SESSION['droit'] != 'admin'){
-        header("location:/index.php");
-    };
+session_start();
+if (!isset($_SESSION['droit']) || $_SESSION['droit'] != 'admin') {
+    header("Location: /php/pages/connection.php");
+};
+
+require_once("../template/inc_connectionBase.php");
+
+//Requete pour récupérer tout les joueurs
+$texteReq = "select * ";
+$texteReq .= "from joueur";
+
+//demander la creation de la requete à l'instance PDO ($cnx)
+$requete = $cnx->prepare($texteReq);
+
+//Execution de la requête
+$requete->execute();
+$tabJoueur = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+//Requete pour récupérer tout les user
+$texteReq = "select * ";
+$texteReq .= "from users";
+
+//demander la creation de la requete à l'instance PDO ($cnx)
+$requete = $cnx->prepare($texteReq);
+
+//Execution de la requête
+$requete->execute();
+$tabUser = $requete->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <?php
-        include_once("../template/inc_headers.php");
-    ?>
-   <title>Admin</title>
-</head>
-<body class="container">
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-</body>
+    <head>
+        <?php
+        include_once("../template/inc_head.php");
+        ?>
+        <title>Admin</title>
+    </head>
+    <body class="container">
+        <?php
+        include_once("../template/inc_header.php");
+        ?>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Login</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">But par match</th>
+                    <th scope="col">But total</th>
+                    <th scope="col">Nombre de match</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($tabJoueur as $joueur) {
+                    $login = "";
+                    foreach ($tabUser as $user) {
+                        if ($user["user_id"] == $joueur["user_id"]) {
+                            $login = $user["login"];
+                        }
+                    }
+                    echo "
+                          <tr>
+                            <td>".$login."</td>
+                            <td>".$joueur["nom"]."</td>
+                            <td>".$joueur["prenom"]."</td>
+                            <td>".$joueur["but_total"]."</td>
+                            <td>".$joueur["nb_match"]."</td>
+                            <td>".$joueur["but_par_match"]."</td>
+                            <td>
+                                <a href=\"modifJoueur.php?id=".$joueur["joueur_id"]."&nom=".$joueur["nom"]."&prenom=".$joueur["prenom"]."&nb_buts=".$joueur["but_total"]."&nb_match=".$joueur["nb_match"]."&nbut_par_match=".$joueur["but_par_match"]."\" class=\"btn btn-info btn-lg\">
+                                    <span class=\"glyphicon glyphicon-edit\"></span> Edit
+                                </a>
+                            </td>
+                         </tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </body>
 </html>
