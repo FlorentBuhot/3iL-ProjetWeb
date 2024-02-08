@@ -1,48 +1,85 @@
 <?php
-    session_start();
-    if($_SESSION['droit'] != 'admin'){
-        header("location:/index.php");
-    };
+session_start();
+if (!isset($_SESSION['droit']) || $_SESSION['droit'] != 'admin') {
+    header("Location: /php/pages/connection.php");
+};
+
+require_once("../template/inc_connectionBase.php");
+
+//Requete pour récupérer tout les joueurs
+$texteReq = "select * ";
+$texteReq .= "from joueur";
+
+//demander la creation de la requete à l'instance PDO ($cnx)
+$requete = $cnx->prepare($texteReq);
+
+//Execution de la requête
+$requete->execute();
+$tabJoueur = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+//Requete pour récupérer tout les user
+$texteReq = "select * ";
+$texteReq .= "from users";
+
+//demander la creation de la requete à l'instance PDO ($cnx)
+$requete = $cnx->prepare($texteReq);
+
+//Execution de la requête
+$requete->execute();
+$tabUser = $requete->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <?php
-        include_once("../template/inc_headers.php");
-    ?>
-    <title>Admin</title>
-</head>
-<body class="container">
-    <h1>Gestion des bonus/malus</h1>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nom</th>
-                <th>prenom</th>
-                <th>voir</th>
-                <th>edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>K</td>
-                <td>Walid</td>
-                <td>-2</td>
-                <?php // voir https://icons.getbootstrap.com/ pour les icones (avec le css inclus via cdn ci-dessus) ?>
-                <td><i class="bi-search text-primary"></i></td>
-                <td><i class="bi-pencil text-danger"></i></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>R</td>
-                <td>Ingrid</td>
-                <td>0.01</td>
-                <td><i class="bi-search text-primary"></i></td>
-                <td><i class="bi-pencil text-danger"></i></td>
-            </tr>
-        </tbody>
-    </table>
-</body>
+    <head>
+        <?php
+        include_once("../template/inc_head.php");
+        ?>
+        <title>Admin</title>
+    </head>
+    <body class="container">
+        <?php
+        include_once("../template/inc_header.php");
+        ?>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Login</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">But par match</th>
+                    <th scope="col">But total</th>
+                    <th scope="col">Nombre de match</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                foreach ($tabJoueur as $joueur) {
+                    $login = "";
+                    foreach ($tabUser as $user) {
+                        if ($user["user_id"] == $joueur["user_id"]) {
+                            $login = $user["login"];
+                        }
+                    }
+                    echo "
+                          <tr>
+                            <td>".$login."</td>
+                            <td>".$joueur["nom"]."</td>
+                            <td>".$joueur["prenom"]."</td>
+                            <td>".$joueur["but_total"]."</td>
+                            <td>".$joueur["nb_match"]."</td>
+                            <td>".$joueur["but_par_match"]."</td>
+                            <td>
+                                <a href=\"modifJoueur.php?id=".$joueur["joueur_id"]."&nom=".$joueur["nom"]."&prenom=".$joueur["prenom"]."&nb_buts=".$joueur["but_total"]."&nb_match=".$joueur["nb_match"]."&nbut_par_match=".$joueur["but_par_match"]."\" class=\"btn btn-info btn-lg\">
+                                    <span class=\"glyphicon glyphicon-edit\"></span> Edit
+                                </a>
+                            </td>
+                         </tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </body>
 </html>
