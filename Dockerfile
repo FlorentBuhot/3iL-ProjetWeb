@@ -1,7 +1,5 @@
 FROM php:8.3-fpm
 
-COPY ./docker/php/php.ini /usr/local/etc/php/
-
 RUN apt-get update && apt-get install -y \
     git \
     curl \
