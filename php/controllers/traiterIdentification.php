@@ -56,11 +56,11 @@
     $_SESSION["droit"] = $droits;
 
     if ($droits=="admin"){
-        header("Location:/php/pages/admin.php");
+        header("Location:/php/pages/pageAdmin.php");
         exit();
     } elseif ($droits == "etudiant"){
         // rediriger vers la pages d'affichage du profil de l'étudiant zoe
-        header("Location:/php/pages/profil.php");
+        header("Location:/php/pages/pageProfil.php");
         exit();
     } else {
         // si pas connu : rediriger sur l'accueil (index.php)

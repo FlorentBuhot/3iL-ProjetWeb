@@ -1,7 +1,7 @@
 <?php
     session_start();
-    if($_SESSION['droit'] != 'chef'){
-        header("location:/index.php");
+    if($_SESSION['role'] != 'chef'){
+        header("location:index.php");
     };
 ?>
 <!DOCTYPE html>
