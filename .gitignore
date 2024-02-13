@@ -1,5 +1,1 @@
-
-docker/data/db/mysql.sock
-docker/data/db/#innodb_temp/*
-docker/data/db/#innodb_redo/*
 session/*
