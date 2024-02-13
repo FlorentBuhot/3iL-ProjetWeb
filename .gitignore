@@ -1,2 +1,2 @@
 
-docker/data/db/mysql.sock
+docker/data/db/*
