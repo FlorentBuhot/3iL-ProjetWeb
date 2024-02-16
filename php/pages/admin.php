@@ -1,48 +1,31 @@
 <?php
-    session_start();
-    if($_SESSION['droit'] != 'chef'){
-        header("location:/index.php");
-    };
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <?php
-        include_once("../template/inc_headers.php");
-    ?>
-    <title>Admin</title>
-</head>
-<body class="container">
-    <h1>Gestion des bonus/malus</h1>
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>id</th>
-                <th>nom</th>
-                <th>prenom</th>
-                <th>voir</th>
-                <th>edit</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>K</td>
-                <td>Walid</td>
-                <td>-2</td>
-                <?php // voir https://icons.getbootstrap.com/ pour les icones (avec le css inclus via cdn ci-dessus) ?>
-                <td><i class="bi-search text-primary"></i></td>
-                <td><i class="bi-pencil text-danger"></i></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>R</td>
-                <td>Ingrid</td>
-                <td>0.01</td>
-                <td><i class="bi-search text-primary"></i></td>
-                <td><i class="bi-pencil text-danger"></i></td>
-            </tr>
-        </tbody>
-    </table>
-</body>
-</html>
+session_start();
+if (!isset($_SESSION['droit']) || $_SESSION['droit'] != 'admin') {
+    header("Location: /php/pages/connection.php");
+};
+
+require_once("../template/inc_connectionBase.php");
+
+//Requete pour récupérer tout les joueurs
+$texteReq = "select * ";
+$texteReq .= "from joueur";
+
+//demander la creation de la requete à l'instance PDO ($cnx)
+$requete = $cnx->prepare($texteReq);
+
+//Execution de la requête
+$requete->execute();
+$tabJoueur = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+//Requete pour récupérer tout les user
+$texteReq = "select * ";
+$texteReq .= "from user";
+
+//demander la creation de la requete à l'instance PDO ($cnx)
+$requete = $cnx->prepare($texteReq);
+
+//Execution de la requête
+$requete->execute();
+$tabUser = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+require_once("../view/admin.php");

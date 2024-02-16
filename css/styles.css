@@ -1,0 +1,31 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url("../ressource/image/fond_cage.png");
+    background-size: cover;
+}
+
+#login_form {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 22%;
+    /*font-weight: bold;*/
+    border-radius: 5px;
+    z-index: 2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-bottom: 20px;
+}
+
+.form-control{
+    background-color:rgba(0, 0, 0, 0) !important;
+    color: white !important;
+    /* width: 110% !important; */
+}
+
+.style_a {
+    color: white;
+    font-weight: bold;
+    text-decoration:none;
+}
