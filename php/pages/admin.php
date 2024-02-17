@@ -28,5 +28,4 @@ $requete = $cnx->prepare($texteReq);
 $requete->execute();
 $tabUser = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-
 require_once("../view/admin.php");

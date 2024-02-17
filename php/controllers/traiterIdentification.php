@@ -13,7 +13,6 @@ require_once("../template/inc_connectionBase.php");
 //             pas nécessairement une bonne pratique
 //----------------------------------------------------------------------------------
 
-
 // Pas reçues, ou "vide" : on sort
 if (empty($_REQUEST['login']) || empty($_REQUEST['pass'])){
     header('Location:/php/pages/connection.php?msg=Champ manquant');
@@ -23,7 +22,6 @@ if (empty($_REQUEST['login']) || empty($_REQUEST['pass'])){
 // on passe par des variables plus rapides à écrire...
 $login = $_REQUEST['login'];
 $pass  = $_REQUEST['pass'];
-
 
 //Requete de sélection pour tester
 //Création du texte de la requête
@@ -35,7 +33,6 @@ $texteReq .= "where login = :log";
 
 $requete = $cnx->prepare($texteReq);
 $requete->bindParam(':log', $login);
-
 
 //Execution de la requête
 $requete->execute();
