@@ -1,6 +1,6 @@
 <?php
 // Créer une instance de PDO
-$cnx = new PDO("mysql:host=mysql;dbname=riflonade", "rifloneur", "riflon");
+$cnx = new PDO("mysql:host=mysql;dbname=database", "admin", "admin");
 
 // Test
 /*

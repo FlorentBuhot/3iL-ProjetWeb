@@ -1,4 +1,5 @@
 DOCKER_COMPOSE = docker-compose
+DOCKER = docker
 
 start: ## Start the environment
     $(DOCKER_COMPOSE) up -d --remove-orphans
@@ -26,3 +27,6 @@ composer-update: ## Update Composer dependencies from the "php" container
 
 migration: ## Launch migrations installation
     $(DOCKER_COMPOSE) exec php php migrations/Tools/script.php
+
+clean: ## Clean volume data
+	$(DOCKER) system prune --volumes

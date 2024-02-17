@@ -3,7 +3,7 @@
 
 <head>
     <?php
-    include_once("/var/www/html/php/template/inc_headers.php");
+    include_once("/var/www/html/php/template/inc_header.php");
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,7 +37,7 @@
         <div class="mt-2 w-10">
             <button class="btn btn-success w-100" type="submit">S'identifier</button>
         </div>
-        <p>Vous avez un compte ? <a class="style_a" href="/php/pages/connection.php">Se connecter</a></p>
+        <p>Vous avez un compte ? <a class="style_a" href="conneXion">Se connecter</a></p>
     </form>
 </div>
 

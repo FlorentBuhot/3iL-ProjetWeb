@@ -1,21 +1,18 @@
 <?php
-session_start();
-require_once("../template/inc_connectionBase.php");
+require_once("php/template/inc_connexionBase.php");
 
-if (empty($_REQUEST['nom']) || empty($_REQUEST['prenom']) || empty($_REQUEST['nb_match']) || empty($_REQUEST['nb_buts']) || empty($_REQUEST['joueur_id'])){
-    header("Location:/php/pages/modifJoueur.php?id=".$_REQUEST["joueur_id"]."&nom=".$_REQUEST["nom"]."&prenom=".$_REQUEST["prenom"]."&nb_buts=".$_REQUEST["but_total"]."&nb_match=".$_REQUEST["nb_match"]."&nbut_par_match=".$_REQUEST["but_par_match"]);
-    exit(); // header ne provoque pas l'arrêt du script
-}
-
-// on passe par des variables plus rapides à écrire...
+// on passe par des variables plus rapides à écrire
 $nom = $_REQUEST['nom'];
 $prenom = $_REQUEST['prenom'];
 $nbMatch = $_REQUEST['nb_match'];
-$nbButs = $_REQUEST['nb_buts'];
+$nbButs = $_REQUEST['nb_but'];
+$nbArret = $_REQUEST['nb_arret'];
+$nbPasseDe = $_REQUEST['nb_passe_de'];
+$score = $_REQUEST['score'];
 $joueurId = $_REQUEST['joueur_id'];
 
 $texteReq = "update joueur ";
-$texteReq .= "set nom = :nom, prenom = :prenom, but_total = :nb_buts, nb_match = :nb_match ";
+$texteReq .= "set nom = :nom, prenom = :prenom, nb_but = :nb_but, nb_match = :nb_match, nb_arret = :nb_arret, nb_passe_de = :nb_passe_de, score = :score ";
 $texteReq .= "where joueur_id = :joueur_id";
 
 //demander la creation de la requete à l'instance PDO ($cnx)
@@ -23,13 +20,29 @@ $texteReq .= "where joueur_id = :joueur_id";
 $requete = $cnx->prepare($texteReq);
 $requete->bindParam(':nom', $nom);
 $requete->bindParam(':prenom', $prenom);
-$requete->bindParam(':nb_buts', $nbButs);
+$requete->bindParam(':nb_but', $nbButs);
 $requete->bindParam(':nb_match', $nbMatch);
+$requete->bindParam(':nb_arret', $nbArret);
+$requete->bindParam(':nb_passe_de', $nbPasseDe);
+$requete->bindParam(':score', $score);
 $requete->bindParam(':joueur_id', $joueurId);
 
 //Execution de la requête
-$requete->execute();
-$tabRes = $requete->fetchAll(PDO::FETCH_ASSOC);
+try {
+    $requete->execute();
+    $tabRes = $requete->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    header("Location:pageModifJoueur?joueur_id=".$_REQUEST["joueur_id"].
+        "&nom=".$_REQUEST["nom"].
+        "&prenom=".$_REQUEST["prenom"].
+        "&nb_but=".$_REQUEST["nb_but"].
+        "&nb_match=".$_REQUEST["nb_match"].
+        "&nb_arret=".$_REQUEST["nb_arret"].
+        "&nb_passe_de=".$_REQUEST["nb_passe_de"].
+        "&score=".$_REQUEST["score"].
+        "&msg=Erreur avec la base de données");
+    exit();
+}
 
-header("Location:/php/pages/admin.php");
+header("Location:admin");
 exit();

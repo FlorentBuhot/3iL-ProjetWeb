@@ -23,7 +23,7 @@
             ?>
         </p>
     </div>
-    <form class="p-5" action="/php/controllers/traiterIdentification.php" method="post">
+    <form class="p-5" action="/connexion" method="post">
         <h1 class="fw-bold">S'identifier</h1>
         <div class="form-group">
             <input class="form-control mb-2 p-2" id="inLogin" name="login" type="text"
@@ -36,7 +36,7 @@
         <div class="mt-2 w-10">
             <button class="btn btn-success w-100" type="submit">S'identifier</button>
         </div>
-        <p>Vous n'avez pas de compte ? <a class="style_a" href="/php/pages/inscription.php">Inscrivez-vous</a></p>
+        <p>Vous n'avez pas de compte ? <a class="style_a" href="inscription">Inscrivez-vous</a></p>
     </form>
 </div>
 </body>
