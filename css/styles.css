@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     background-image: url("../img/fond_cage.png");
+    background-image: url("../ressource/image/fond_cage.png");
     background-size: cover;
 }
 

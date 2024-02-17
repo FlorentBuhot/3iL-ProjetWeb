@@ -9,6 +9,8 @@ services:
       - ./docker/php/conf.d/error_reporting.ini:/usr/local/etc/php/conf.d/error_reporting.ini
       - ./session:/var/lib/php/sessions
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+    extra_hosts:
+      - host.docker.internal:host-gateway
     links:
       - mysql
 
