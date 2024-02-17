@@ -3,8 +3,7 @@
 // Un peu de traçage des valeurs reçues
 //----------------------------------------
 
-session_start();
-require_once("../template/inc_connectionBase.php");
+require_once("php/template/inc_connexionBase.php");
 
 
 //----------------------------------------------------------------------------------
@@ -15,8 +14,8 @@ require_once("../template/inc_connectionBase.php");
 
 // Pas reçues, ou "vide" : on sort
 if (empty($_REQUEST['login']) || empty($_REQUEST['pass'])){
-    header('Location:/php/pages/connection.php?msg=Champ manquant');
-    exit(); // header ne provoque pas l'arrêt du script
+    header('Location:pageConnexion?msg=Champ manquant');
+    exit();
 }
 
 // on passe par des variables plus rapides à écrire...
@@ -39,23 +38,25 @@ $requete->execute();
 $tabRes = $requete->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($tabRes) != 1 || !password_verify($pass, $tabRes[0]["password"])) {
-    header('Location:/php/pages/connection.php?msg=Login ou mot de passe incorrect');
+    header('Location:/connexion?msg=Login ou mot de passe incorrect');
     exit();
 }
 
-$droit = $tabRes[0]["role"];
+$role = $tabRes[0]["role"];
 $_SESSION["login"] = $login;
-$_SESSION["droit"] = $droit;
+$_SESSION["role"] = $role;
 
-if ($droit == "admin"){
-    header("Location:/php/pages/admin.php");
-    exit();
-} elseif ($droit == "joueur"){
-    // rediriger vers la pages d'affichage du profil de l'étudiant zoe
-    header("Location:/php/pages/joueur.php");
-    exit();
-} else {
-    // si pas connu : rediriger sur l'accueil (index.php)
-    header('Location:/php/pages/connection.php');
-    exit();
+switch ($role) {
+    case 'admin':
+        header("Location:admin");
+        exit();
+    case 'organisateur':
+        header("Location:organisateur");
+        exit();
+    case 'joueur':
+        header("Location:joueur");
+        exit();
+    default:
+        header('Location:connexion');
+        exit();
 }

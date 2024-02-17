@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql
--- Généré le : ven. 16 fév. 2024 à 17:50
+-- Généré le : sam. 17 fév. 2024 à 16:56
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.8
 
@@ -27,7 +27,6 @@ SET time_zone = "+00:00";
 -- Structure de la table `equipe`
 --
 
-DROP TABLE IF EXISTS `equipe`;
 CREATE TABLE `equipe` (
   `equipe_id` int NOT NULL,
   `nom` varchar(15) NOT NULL,
@@ -45,7 +44,6 @@ CREATE TABLE `equipe` (
 -- Structure de la table `joueur`
 --
 
-DROP TABLE IF EXISTS `joueur`;
 CREATE TABLE `joueur` (
   `joueur_id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -58,13 +56,19 @@ CREATE TABLE `joueur` (
   `score` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Déchargement des données de la table `joueur`
+--
+
+INSERT INTO `joueur` (`joueur_id`, `user_id`, `nom`, `prenom`, `nb_match`, `nb_but`, `nb_arret`, `nb_passe_de`, `score`) VALUES
+(1, 4, 'Florent', 'Buhot', 1, 0, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `rencontre`
 --
 
-DROP TABLE IF EXISTS `rencontre`;
 CREATE TABLE `rencontre` (
   `match_id` int NOT NULL,
   `equipe1_id` int NOT NULL,
@@ -79,7 +83,6 @@ CREATE TABLE `rencontre` (
 -- Structure de la table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int NOT NULL,
   `login` varchar(30) NOT NULL,
@@ -93,7 +96,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `login`, `password`, `role`) VALUES
 (1, 'admin@3il.fr', '$2y$10$Lm3e8UWdNAYVkMx02Y62.e1OABC3Hd2VOww7UC9WiiAhf2MaM.iKa', 'admin'),
-(3, 'deni@3il.fr', '$2y$10$RRntyQu5S75.Ho2o0py3J.DEGt25BA2DxfiWDYYcSvp5/daR01XZK', 'organisateur');
+(3, 'deni@3il.fr', '$2y$10$RRntyQu5S75.Ho2o0py3J.DEGt25BA2DxfiWDYYcSvp5/daR01XZK', 'organisateur'),
+(4, 'buhotf@3il.fr', '$2y$10$0tGBTxMOsBSJOHxu4fqd5.uFa0RW0JrzPvfnCQFrTUgeYKWCxIrba', 'joueur');
 
 --
 -- Index pour les tables déchargées
@@ -139,7 +143,7 @@ ALTER TABLE `equipe`
 -- AUTO_INCREMENT pour la table `joueur`
 --
 ALTER TABLE `joueur`
-  MODIFY `joueur_id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `joueur_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `rencontre`
@@ -151,7 +155,7 @@ ALTER TABLE `rencontre`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

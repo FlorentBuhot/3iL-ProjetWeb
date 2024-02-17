@@ -1,43 +1,105 @@
 <?php
-session_save_path();
 session_start();
-$request = $_SERVER['REQUEST_URI'];
 
-if(isset($_SESSION["role"]))
-{
+// Initialisation des routes
+$routes = [];
+
+// Admin routes
+$routes['/admin'] = 'php/pages/admin.php';
+$routes['/pageModifUser'] = 'php/pages/modifUser.php';
+$routes['/pageModifJoueur'] = 'php/pages/modifJoueur.php';
+$routes['/modifierJoueur'] = 'php/controllers/modifierJoueur.php';
+$routes['/modifierUser'] = 'php/controllers/modifierUser.php';
+
+// Organisateur routes
+
+
+// Joueur routes
+
+// Other routes
+$routes['/connexion'] = 'php/controllers/traiterIdentification.php';
+$routes['/pageConnexion'] = 'php/pages/connexion.php';
+$routes['/inscription'] = 'php/pages/inscription.php';
+$routes['/deconnexion'] = 'php/pages/connexion.php';
+
+// Récupérer l'URL demandée et la méthode HTTP depuis $_SERVER
+$action = $_SERVER['REQUEST_URI'];
+$requestMethod = $_SERVER['REQUEST_METHOD'];
+
+if ($action === "/pass") {
+    redirect("php/utiles/genPassword.php");
+    exit();
+}
+
+if ($requestMethod === 'GET') {
+    $totalRequest = explode("?", $action);
+    $action = $totalRequest[0];
+}
+
+if(isset($_SESSION["role"])) {
     switch ($_SESSION["role"]) {
         case 'admin':
-            admin($request);
+            admin($action, $routes);
             break;
         case 'organisateur':
-            organisateur($request);
+            organisateur($action, $routes);
             break;
         case 'joueur':
-            joueur($request);
+            joueur($action, $routes);
             break;
         default:
-            redirect("/php/pages/connection.php");
+            redirect("php/pages/connexion.php");
             break;
     }
+} else {
+    switch ($action) {
+        case '/inscription':
+            redirect($routes['/inscription']);
+            break;
+        case '/connexion':
+            redirect($routes['/connexion']);
+            break;
+        default:
+            redirect($routes['/pageConnexion']);
+    }
 }
-redirect("php/pages/connection.php");
 
-function admin($request)
+function admin($action, $routes)
 {
-    redirect("php/pages/admin.php");
+    switch ($action) {
+        case '/admin':
+            redirect($routes['/admin']);
+            break;
+        case '/pageModifJoueur':
+            redirect($routes['/pageModifJoueur']);
+            break;
+        case '/pageModifUser':
+            redirect($routes['/pageModifUser']);
+            break;
+        case '/modifierUser':
+            redirect($routes['/modifierUser']);
+            break;
+        case '/modifierJoueur':
+            redirect($routes['/modifierJoueur']);
+            break;
+        default:
+            redirect("php/pages/admin.php");
+            break;
+
+    }
 }
 
-function organisateur($request)
+function organisateur($request, $routes)
 {
     redirect("php/pages/organisateur.php");
 }
 
-function joueur($request)
+function joueur($request, $routes)
 {
     redirect("php/pages/joueur.php");
 }
 
 function redirect($route)
 {
-    require($route);
+    require_once($route);
 }
