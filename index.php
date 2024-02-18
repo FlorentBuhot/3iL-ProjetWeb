@@ -26,6 +26,7 @@ $routes['/deconnexion'] = 'php/pages/connexion.php';
 $action = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
+// TO DO : virer ce truc
 if ($action === "/pass") {
     redirect("php/utiles/genPassword.php");
     exit();
