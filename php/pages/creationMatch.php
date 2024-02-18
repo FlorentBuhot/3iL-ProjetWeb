@@ -1,6 +1,6 @@
 <?php
-require_once("../template/inc_head.php");
-require_once("../template/inc_header.php");
+require_once("php/template/inc_head.php");
+require_once("php/template/inc_header.php");
 ?>
 <script src="/js/date.js" defer></script>
 <script src="/js/heure.js" defer></script>
