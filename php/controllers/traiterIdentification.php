@@ -54,6 +54,10 @@ if ($droit == "admin"){
     // rediriger vers la pages d'affichage du profil de l'étudiant zoe
     header("Location:/php/pages/joueur.php");
     exit();
+} elseif ($droit == "organisateur"){
+    // rediriger vers la pages d'affichage du profil de l'étudiant zoe
+    header("Location:/php/pages/organisateur.php");
+    exit();
 } else {
     // si pas connu : rediriger sur l'accueil (index.php)
     header('Location:/php/pages/connection.php');
