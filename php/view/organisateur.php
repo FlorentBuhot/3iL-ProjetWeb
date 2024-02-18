@@ -85,6 +85,7 @@ include_once("php/template/inc_header.php");
                                     <td>
                                         <a href=\"pageModifMatch?id_match=" . $match["id_match"] .
                                             "&nom_match=" . $match["nom_match"] .
+                                            "&description_match=" . $match["description_match"] .
                                             "&id_equipe_1=" . $match["id_equipe_1"] .
                                             "&id_equipe_2=" . $match["id_equipe_2"] .
                                             "&date_match=" . $match["date_match"] .

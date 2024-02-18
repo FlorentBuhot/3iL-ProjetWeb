@@ -18,13 +18,13 @@ $tabEquipes = $requete->fetchAll(PDO::FETCH_ASSOC);
     <h1 class="mt-5">Modification d'un match</h1>
 
     <form method="post" action="/modifierMatch">
-        <input type="text" value="<?php echo htmlentities($_REQUEST['id_match'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
+        <input type="text" value="<?php echo $_REQUEST['id_match']; ?>"
                name="id_match" class="form-control" aria-label="Sizing example input"
                aria-describedby="inputGroup-sizing-lg" hidden>
         <div class="input-group input-group-lg mt-3">
             <span class="input-group-text" id="inputGroup-sizing-lg">Nom du match :</span>
             <input type="text"
-                   value="<?php echo htmlentities($_REQUEST['nom_match'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
+                   value="<?php echo $_REQUEST['nom_match']; ?>"
                    class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"
                    name="nom_match"
                    required>
@@ -33,7 +33,7 @@ $tabEquipes = $requete->fetchAll(PDO::FETCH_ASSOC);
         <div class="input-group input-group-lg">
             <span class="input-group-text" id="inputGroup-sizing-lg">Description du match :</span>
             <input type="text"
-                   value="<?php echo htmlentities($_REQUEST['description_match'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
+                   value="<?php echo $_REQUEST['description_match']; ?>"
                    class="form-control" aria-label="Sizing example input"
                    name="description_match"
                    aria-describedby="inputGroup-sizing-lg">
@@ -48,7 +48,7 @@ $tabEquipes = $requete->fetchAll(PDO::FETCH_ASSOC);
             <br/>
             <label for="start">Date de début :</label>
             <input type="date"
-                   value="<?php echo htmlentities($_REQUEST['date_match'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
+                   value="<?php echo $_REQUEST['date_match']; ?>"
                    class="form-control"
                    name="date_match"
                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
@@ -58,7 +58,7 @@ $tabEquipes = $requete->fetchAll(PDO::FETCH_ASSOC);
             <br/>
             <label for="start-time">Heure de début :</label>
             <input type="time"
-                   value="<?php echo htmlentities($_REQUEST['heure_match'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
+                   value="<?php echo $_REQUEST['heure_match']; ?>"
                    class="form-control"
                    name="heure_match"
                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
@@ -72,7 +72,7 @@ $tabEquipes = $requete->fetchAll(PDO::FETCH_ASSOC);
             <br/>
             <label for="start">Équipe 1 :</label>
             <select class="form-select" aria-label="Default select" name="id_equipe_1">
-                <option value="<?php echo htmlentities($_REQUEST['id_equipe_1'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
+                <option value="<?php echo $_REQUEST['id_equipe_1']; ?>"
                         selected>
                     <?php
                     $id_equipe_1 = $_REQUEST['id_equipe_1'];
@@ -101,7 +101,7 @@ $tabEquipes = $requete->fetchAll(PDO::FETCH_ASSOC);
             <br/>
             <label for="start">Équipe 2 :</label>
             <select class="form-select" aria-label="Default select" name="id_equipe_2">
-                <option value="<?php echo htmlentities($_REQUEST['id_equipe_2'], ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?>"
+                <option value="<?php echo $_REQUEST['id_equipe_2']; ?>"
                         selected>
                     <?php
                     $id_equipe_2 = $_REQUEST['id_equipe_2'];
