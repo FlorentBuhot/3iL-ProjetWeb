@@ -1,5 +1,5 @@
 <?php
-    require_once("../template/inc_head.php");
+    require_once("php/template/inc_head.php");
 ?>
 
 <nav class="navbar navbar-dark bg-dark">
