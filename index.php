@@ -123,4 +123,3 @@ function redirect($route)
 {
     require_once($route);
 }
-
