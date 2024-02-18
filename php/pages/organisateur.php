@@ -17,4 +17,29 @@
     $requete->execute();
     $tabmatch = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-require_once("php/view/organisateur.php");
+    foreach ($tabmatch as $match) {
+        $texteReq = "select nom ";
+        $texteReq .= "from equipe ";
+        $texteReq .= "where equipe_id = :equipe_id";
+
+        //demander la creation de la requete à l'instance PDO ($cnx)
+        $requete = $cnx->prepare($texteReq);
+        $requete->bindParam(':equipe_id', $match['id_equipe_1']);
+
+        //Execution de la requête
+        $requete->execute();
+        $match['nom_equipe_1'] = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+        $texteReq = "select nom ";
+        $texteReq .= "from equipe ";
+        $texteReq .= "where equipe_id = :equipe_id";
+
+        //demander la creation de la requete à l'instance PDO ($cnx)
+        $requete = $cnx->prepare($texteReq);
+        $requete->bindParam(':equipe_id', $match['id_equipe_2']);
+
+        //Execution de la requête
+        $requete->execute();
+        $match['nom_equipe_2'] = $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
+    require_once("php/view/organisateur.php");

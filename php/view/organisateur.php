@@ -40,6 +40,29 @@ include_once("php/template/inc_header.php");
                 <?php
                 if (count($tabmatch) > 0) {
                     foreach ($tabmatch as $match) {
+                        $texteReq = "select nom ";
+                        $texteReq .= "from equipe ";
+                        $texteReq .= "where equipe_id = :equipe_id";
+
+                        //demander la creation de la requete à l'instance PDO ($cnx)
+                        $requete = $cnx->prepare($texteReq);
+                        $requete->bindParam(':equipe_id', $match['id_equipe_1']);
+
+                        //Execution de la requête
+                        $requete->execute();
+                        $nomEquipe1 = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+                        $texteReq = "select nom ";
+                        $texteReq .= "from equipe ";
+                        $texteReq .= "where equipe_id = :equipe_id";
+
+                        //demander la creation de la requete à l'instance PDO ($cnx)
+                        $requete = $cnx->prepare($texteReq);
+                        $requete->bindParam(':equipe_id', $match['id_equipe_2']);
+
+                        //Execution de la requête
+                        $requete->execute();
+                        $nomEquipe2 = $requete->fetchAll(PDO::FETCH_ASSOC);
                         echo "
                         <table class=\"table\">
                             <thead>
@@ -55,8 +78,8 @@ include_once("php/template/inc_header.php");
                             <tbody>
                                   <tr>
                                     <td>" . $match["nom_match"] . "</td>
-                                    <td>" . $match["id_equipe_1"] . "</td>
-                                    <td>" . $match["id_equipe_2"] . "</td>
+                                    <td>" . $nomEquipe1[0]['nom'] . " </td>
+                                    <td>" . $nomEquipe2[0]['nom'] . " </td>
                                     <td>" . $match["date_match"] . " " . $match["heure_match"] . "</td>
                                     <td>" . $match["score_equipe_1"] . "-". $match["score_equipe_2"] ."</td>
                                     <td>
