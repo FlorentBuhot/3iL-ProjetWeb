@@ -14,7 +14,8 @@ $routes['/modifierUser'] = 'php/controllers/modifierUser.php';
 // Organisateur routes
 $routes['/organisateur'] = 'php/pages/organisateur.php';
 $routes['/pageCreationMatch'] = 'php/pages/creationMatch.php';
-
+$routes['/pageModifMatch'] = 'php/pages/modifMatch.php';
+$routes['/modifierMatch'] = 'php/controllers/modifierMatch.php';
 
 // Joueur routes
 $routes['/joueur'] = 'php/pages/joueur.php';
@@ -81,9 +82,6 @@ if(isset($_SESSION["role"])) {
 function admin($action, $routes)
 {
     switch ($action) {
-        case '/admin':
-            redirect($routes['/admin']);
-            break;
         case '/pageModifJoueur':
             redirect($routes['/pageModifJoueur']);
             break;
@@ -97,7 +95,7 @@ function admin($action, $routes)
             redirect($routes['/modifierJoueur']);
             break;
         default:
-            redirect("php/pages/admin.php");
+            redirect($routes['/admin']);
             break;
 
     }
@@ -106,11 +104,14 @@ function admin($action, $routes)
 function organisateur($action, $routes)
 {
     switch ($action) {
-        case '/organisateur':
-            redirect($routes['/organisateur']);
-            break;
         case '/pageCreationMatch':
             redirect($routes['/pageCreationMatch']);
+            break;
+        case '/pageModifMatch':
+            redirect($routes['/pageModifMatch']);
+            break;
+        case '/modifierMatch':
+            redirect($routes['/modifierMatch']);
             break;
         default:
             redirect($routes['/organisateur']);
