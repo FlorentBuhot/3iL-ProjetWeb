@@ -32,8 +32,6 @@ $texteReq .= "where login = :log";
 
 $requete = $cnx->prepare($texteReq);
 $requete->bindParam(':log', $login);
-
-//Execution de la requête
 $requete->execute();
 $tabRes = $requete->fetchAll(PDO::FETCH_ASSOC);
 
