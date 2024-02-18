@@ -24,7 +24,7 @@ $pass  = $_REQUEST['pass'];
 
 //Requete de sélection pour tester
 //Création du texte de la requête
-$texteReq = "select role, password ";
+$texteReq = "select role, password, user_id ";
 $texteReq .= "from user ";
 $texteReq .= "where login = :log";
 
@@ -45,13 +45,14 @@ if (count($tabRes) != 1 || !password_verify($pass, $tabRes[0]["password"])) {
 $role = $tabRes[0]["role"];
 $_SESSION["login"] = $login;
 $_SESSION["role"] = $role;
+$_SESSION["user_id"] = $tabRes[0]["user_id"];
 
 switch ($role) {
     case 'admin':
         header("Location:admin");
         exit();
     case 'organisateur':
-        header("Location:organisateur");
+        header("Location:pageOrganisateur");
         exit();
     case 'joueur':
         header("Location:joueur");

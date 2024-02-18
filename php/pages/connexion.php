@@ -23,7 +23,7 @@
             ?>
         </p>
     </div>
-    <form class="p-5" action="/pageConnexion" method="post">
+    <form class="p-5" action="/connexion" method="post">
         <h1 class="fw-bold">S'identifier</h1>
         <div class="form-group">
             <input class="form-control mb-2 p-2" id="inLogin" name="login" type="text"
