@@ -40,7 +40,7 @@ try {
     $requete->execute();
     $tabRes = $requete->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    header("Location:pageModifUser?id_match=".$_REQUEST["id_match"]."&nom_match=".$_REQUEST["nom_match"]."&date_match=".$_REQUEST["date_match"]."&description_match=".$_REQUEST["description_match"]."&id_equipe_1=".$_REQUEST["id_equipe_1"]."&id_equipe_2=".$_REQUEST["id_equipe_2"]."&score_equipe_1=".$_REQUEST["score_equipe_1"]."&score_equipe_2=".$_REQUEST["score_equipe_2"]."&login=".$_REQUEST["login"]."&msg=Erreur avec la base de données");
+    header("Location:pageModifMatch?id_match=".$_REQUEST["id_match"]."&nom_match=".$_REQUEST["nom_match"]."&date_match=".$_REQUEST["date_match"]."&description_match=".$_REQUEST["description_match"]."&id_equipe_1=".$_REQUEST["id_equipe_1"]."&id_equipe_2=".$_REQUEST["id_equipe_2"]."&score_equipe_1=".$_REQUEST["score_equipe_1"]."&score_equipe_2=".$_REQUEST["score_equipe_2"]."&login=".$_REQUEST["login"]."&msg=Erreur avec la base de données");
     exit();
 }
 
