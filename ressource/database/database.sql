@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql
--- Généré le : dim. 18 fév. 2024 à 13:41
+-- Généré le : dim. 18 fév. 2024 à 16:47
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.8
 
@@ -27,7 +27,6 @@ SET time_zone = "+00:00";
 -- Structure de la table `equipe`
 --
 
-DROP TABLE IF EXISTS `equipe`;
 CREATE TABLE `equipe` (
   `equipe_id` int NOT NULL,
   `nom` varchar(15) NOT NULL,
@@ -44,7 +43,7 @@ CREATE TABLE `equipe` (
 --
 
 INSERT INTO `equipe` (`equipe_id`, `nom`, `alias`, `id_joueur1`, `id_joueur2`, `id_joueur3`, `id_joueur4`, `id_joueur5`) VALUES
-(1, 'Les lions', 'LL', 1, 1, 1, 1, 1),
+(1, 'Les lions', 'LL', 1, 3, 1, 1, 1),
 (2, 'Tanquille', 'TQL', 2, 2, 2, 2, 2);
 
 -- --------------------------------------------------------
@@ -53,7 +52,6 @@ INSERT INTO `equipe` (`equipe_id`, `nom`, `alias`, `id_joueur1`, `id_joueur2`, `
 -- Structure de la table `joueur`
 --
 
-DROP TABLE IF EXISTS `joueur`;
 CREATE TABLE `joueur` (
   `joueur_id` int NOT NULL,
   `user_id` int NOT NULL,
@@ -72,7 +70,8 @@ CREATE TABLE `joueur` (
 
 INSERT INTO `joueur` (`joueur_id`, `user_id`, `nom`, `prenom`, `nb_match`, `nb_but`, `nb_arret`, `nb_passe_de`, `score`) VALUES
 (1, 1, 'admin', 'admin', 0, 0, 0, 0, 0),
-(2, 2, 'deni', 'deni', 0, 0, 0, 0, 0);
+(2, 2, 'deni', 'deni', 0, 0, 0, 0, 0),
+(3, 6, 'test', 'test', 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -80,7 +79,6 @@ INSERT INTO `joueur` (`joueur_id`, `user_id`, `nom`, `prenom`, `nb_match`, `nb_b
 -- Structure de la table `matchs`
 --
 
-DROP TABLE IF EXISTS `matchs`;
 CREATE TABLE `matchs` (
   `id_match` int NOT NULL,
   `nom_match` varchar(255) DEFAULT NULL,
@@ -108,7 +106,6 @@ INSERT INTO `matchs` (`id_match`, `nom_match`, `date_match`, `heure_match`, `des
 -- Structure de la table `rencontre`
 --
 
-DROP TABLE IF EXISTS `rencontre`;
 CREATE TABLE `rencontre` (
   `match_id` int NOT NULL,
   `equipe1_id` int NOT NULL,
@@ -123,7 +120,6 @@ CREATE TABLE `rencontre` (
 -- Structure de la table `user`
 --
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `user_id` int NOT NULL,
   `login` varchar(30) NOT NULL,
@@ -137,7 +133,9 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `login`, `password`, `role`) VALUES
 (1, 'admin@3il.fr', '$2y$10$Lm3e8UWdNAYVkMx02Y62.e1OABC3Hd2VOww7UC9WiiAhf2MaM.iKa', 'admin'),
-(3, 'deni@3il.fr', '$2y$10$RRntyQu5S75.Ho2o0py3J.DEGt25BA2DxfiWDYYcSvp5/daR01XZK', 'organisateur');
+(2, 'deni@3il.fr', '$2y$10$RRntyQu5S75.Ho2o0py3J.DEGt25BA2DxfiWDYYcSvp5/daR01XZK', 'organisateur'),
+(5, 'buhotf@3il.fr', '$2y$10$zzGid./GAGzGpN/6WlnLue/fu26fBZUvD3BEU5cIRJY4GV6vGtcJW', 'organisateur'),
+(6, 'test', '$2y$10$B/Yc7uJe727oX4HDr3br1ebNXYN.21coIf4b6l8VGQZ8IFzGmYEW.', 'joueur');
 
 --
 -- Index pour les tables déchargées
@@ -192,7 +190,7 @@ ALTER TABLE `equipe`
 -- AUTO_INCREMENT pour la table `joueur`
 --
 ALTER TABLE `joueur`
-  MODIFY `joueur_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `joueur_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `matchs`
@@ -210,7 +208,7 @@ ALTER TABLE `rencontre`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Contraintes pour les tables déchargées

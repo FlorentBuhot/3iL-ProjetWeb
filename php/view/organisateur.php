@@ -39,9 +39,7 @@ include_once("php/template/inc_header.php");
                 </div>
                 <?php
                 if (count($tabmatch) > 0) {
-                    foreach ($tabmatch as $match) {
-                        echo "
-                        <table class=\"table\">
+                    echo "<table class=\"table\">
                             <thead>
                             <tr>
                                 <th scope=\"col\">Nom du match</th>
@@ -52,11 +50,36 @@ include_once("php/template/inc_header.php");
                                 <th scope=\"col\"></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody>";
+                    foreach ($tabmatch as $match) {
+                        $texteReq = "select nom ";
+                        $texteReq .= "from equipe ";
+                        $texteReq .= "where equipe_id = :equipe_id";
+
+                        //demander la creation de la requete à l'instance PDO ($cnx)
+                        $requete = $cnx->prepare($texteReq);
+                        $requete->bindParam(':equipe_id', $match['id_equipe_1']);
+
+                        //Execution de la requête
+                        $requete->execute();
+                        $nomEquipe1 = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+                        $texteReq = "select nom ";
+                        $texteReq .= "from equipe ";
+                        $texteReq .= "where equipe_id = :equipe_id";
+
+                        //demander la creation de la requete à l'instance PDO ($cnx)
+                        $requete = $cnx->prepare($texteReq);
+                        $requete->bindParam(':equipe_id', $match['id_equipe_2']);
+
+                        //Execution de la requête
+                        $requete->execute();
+                        $nomEquipe2 = $requete->fetchAll(PDO::FETCH_ASSOC);
+                        echo "
                                   <tr>
                                     <td>" . $match["nom_match"] . "</td>
-                                    <td>" . $match["id_equipe_1"] . "</td>
-                                    <td>" . $match["id_equipe_2"] . "</td>
+                                    <td>" . $nomEquipe1[0]['nom'] . " </td>
+                                    <td>" . $nomEquipe2[0]['nom'] . " </td>
                                     <td>" . $match["date_match"] . " " . $match["heure_match"] . "</td>
                                     <td>" . $match["score_equipe_1"] . "-". $match["score_equipe_2"] ."</td>
                                     <td>
@@ -72,10 +95,10 @@ include_once("php/template/inc_header.php");
                                             <span class=\"glyphicon glyphicon-edit\"></span> Edit
                                         </a>
                                     </td>
-                                 </tr>
-                            </tbody>
-                        </table>";
+                                 </tr>";
                     }
+                    echo "</tbody>
+                        </table>";
                 }
                 ?>
             </div>
@@ -83,21 +106,7 @@ include_once("php/template/inc_header.php");
     </div>
 
     <br/><br/>
-
-    <div class="accordion" id="accordionJoueur">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingJoueur">
-                <button class="accordion-button fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJoueur" aria-expanded="true" aria-controls="collapseJoueur">
-                    <img src="/ressource/image/fleche_verte.png" alt="Logo" width="50" height="50"
-                         class="d-inline-block align-text-top fw-bold">Mes matchs en tant que joueur
-                </button>
-            </h2>
-            <div id="collapseJoueur" class="accordion-collapse collapse show" aria-labelledby="headingJoueur" data-bs-parent="#accordionJoueur">
-                <div class="accordion-body">
-                    <h4> Les matchs que je joue</h4>
-                    <p>tableau</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php
+    include_once("php/template/inc_tabMatchJoueur.php");
+    ?>
 </div>

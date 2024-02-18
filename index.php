@@ -22,7 +22,8 @@ $routes['/joueur'] = 'php/pages/joueur.php';
 // Other routes
 $routes['/connexion'] = 'php/controllers/traiterIdentification.php';
 $routes['/pageConnexion'] = 'php/pages/connexion.php';
-$routes['/inscription'] = 'php/pages/inscription.php';
+$routes['/inscription'] = 'php/controllers/traiterInscription.php';
+$routes['/pageInscription'] = 'php/pages/inscription.php';
 $routes['/deconnexion'] = 'php/pages/connexion.php';
 
 // Récupérer l'URL demandée et la méthode HTTP depuis $_SERVER
@@ -65,6 +66,9 @@ if(isset($_SESSION["role"])) {
     switch ($action) {
         case '/inscription':
             redirect($routes['/inscription']);
+            break;
+        case '/pageInscription':
+            redirect($routes['/pageInscription']);
             break;
         case '/connexion':
             redirect($routes['/connexion']);
@@ -123,4 +127,3 @@ function redirect($route)
 {
     require_once($route);
 }
-
