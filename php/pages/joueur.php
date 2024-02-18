@@ -1,36 +1,27 @@
 <?php
-    require_once("../template/inc_head.php");
-    require_once("../template/inc_header.php");
+    require_once("php/template/inc_connexionBase.php");
 
-    require_once("../template/inc_connectionBase.php");
-
-    //Requete pour récupérer tout les joueurs
+    // Get le joueur en cours
     $texteReq = "select * ";
-    $texteReq .= "from matchs";
-    // $texteReq .= "where match";
+    $texteReq .= "from joueur ";
+    $texteReq .= "where user_id = :user_id";
 
     //demander la creation de la requete à l'instance PDO ($cnx)
     $requete = $cnx->prepare($texteReq);
-
-    //Execution de la requête
+    $requete->bindParam(':user_id', $_SESSION['user_id']);
     $requete->execute();
-    $tabmatch = $requete->fetchAll(PDO::FETCH_ASSOC);
-?>
+    $currentJoueur = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-<br/><br/>
+    // Get les match pour ce joueur
+    $texteReq = "select * ";
+    $texteReq .= "from matchs ";
+    $texteReq .= "where id_equipe_1 = (select equipe_id from equipe where (id_joueur1 = :id_joueur or id_joueur2 = :id_joueur or id_joueur3 = :id_joueur or id_joueur4 = :id_joueur or id_joueur5 = :id_joueur)) ";
+    $texteReq .= "or id_equipe_2 = (select equipe_id from equipe where (id_joueur1 = :id_joueur or id_joueur2 = :id_joueur or id_joueur3 = :id_joueur or id_joueur4 = :id_joueur or id_joueur5 = :id_joueur))";
 
-    <div class="accordion" id="accordionJoueur">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingJoueur">
-                <button class="accordion-button fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseJoueur" aria-expanded="true" aria-controls="collapseJoueur">
-                    <img src="/ressource/image/fleche_verte.png" alt="Logo" width="50" height="50"
-                         class="d-inline-block align-text-top fw-bold">Mes matchs en tant que joueur
-                </button>
-            </h2>
-            <div id="collapseJoueur" class="accordion-collapse collapse show" aria-labelledby="headingJoueur" data-bs-parent="#accordionJoueur">
-                <div class="accordion-body">
-                    <h4> Les matchs que je joue</h4>
-                    <p>tableau</p>
-                </div>
-            </div>
-        </div>
+    //demander la creation de la requete à l'instance PDO ($cnx)
+    $requete = $cnx->prepare($texteReq);
+    $requete->bindParam(':id_joueur', $currentJoueur[0]['joueur_id']);
+    $requete->execute();
+    $matchJoueur = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+    include_once("php/view/joueur.php");
