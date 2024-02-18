@@ -12,9 +12,12 @@ $routes['/modifierJoueur'] = 'php/controllers/modifierJoueur.php';
 $routes['/modifierUser'] = 'php/controllers/modifierUser.php';
 
 // Organisateur routes
+$routes['/organisateur'] = 'php/pages/organisateur.php';
+$routes['/pageCreationMatch'] = 'php/pages/creationMatch.php';
 
 
 // Joueur routes
+$routes['/joueur'] = 'php/pages/joueur.php';
 
 // Other routes
 $routes['/connexion'] = 'php/controllers/traiterIdentification.php';
@@ -35,6 +38,12 @@ if ($action === "/pass") {
 if ($requestMethod === 'GET') {
     $totalRequest = explode("?", $action);
     $action = $totalRequest[0];
+}
+
+if ($action === '/deconnexion'){
+    session_destroy();
+    redirect($routes['/deconnexion']);
+    exit();
 }
 
 if(isset($_SESSION["role"])) {
@@ -90,9 +99,19 @@ function admin($action, $routes)
     }
 }
 
-function organisateur($request, $routes)
+function organisateur($action, $routes)
 {
-    redirect("php/pages/organisateur.php");
+    switch ($action) {
+        case '/organisateur':
+            redirect($routes['/organisateur']);
+            break;
+        case '/pageCreationMatch':
+            redirect($routes['/pageCreationMatch']);
+            break;
+        default:
+            redirect($routes['/organisateur']);
+            break;
+    }
 }
 
 function joueur($request, $routes)
