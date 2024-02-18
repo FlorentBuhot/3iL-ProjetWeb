@@ -17,6 +17,13 @@
                 <label for="login">Login :</label>
                 <input required type="text" class="form-control" id="login" name="login" value="<?php echo $_REQUEST['login']?>">
             </div>
+            <p class="text-danger">
+                <?php
+                if (isset($_GET['msg'])) {
+                    echo $_GET['msg'];
+                }
+                ?>
+            </p>
 
             <div class="form-group">
                 <label for="role">Rôle :</label>
