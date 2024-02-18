@@ -49,7 +49,8 @@ include_once("php/template/inc_header.php");
                                 <th scope=\"col\">Score</th>
                                 <th scope=\"col\"></th>
                             </tr>
-                            </thead>";
+                            </thead>
+                            <tbody>";
                     foreach ($tabmatch as $match) {
                         $texteReq = "select nom ";
                         $texteReq .= "from equipe ";
@@ -75,8 +76,6 @@ include_once("php/template/inc_header.php");
                         $requete->execute();
                         $nomEquipe2 = $requete->fetchAll(PDO::FETCH_ASSOC);
                         echo "
-                        <table class=\"table\">
-                            <tbody>
                                   <tr>
                                     <td>" . $match["nom_match"] . "</td>
                                     <td>" . $nomEquipe1[0]['nom'] . " </td>

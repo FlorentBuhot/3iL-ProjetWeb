@@ -49,9 +49,7 @@
                         //Execution de la requête
                         $requete->execute();
                         $nomEquipe2 = $requete->fetchAll(PDO::FETCH_ASSOC);
-                        echo "
-                            
-                                  <tr>
+                        echo "<tr>
                                     <td>" . $match["nom_match"] . "</td>
                                     <td>" . $nomEquipe1[0]['nom'] . " </td>
                                     <td>" . $nomEquipe2[0]['nom'] . " </td>
@@ -67,12 +65,12 @@
                                 "&heure_match=" . $match["heure_match"] .
                                 "&score_equipe_1=" . $match["score_equipe_1"] .
                                 "&score_equipe_2=" . $match["score_equipe_2"] . "\" 
-                                        class=\"btn btn-info btn-lg\">
+                                        class=\"btn btn-info btn-lg\">**
                                             <span class=\"glyphicon glyphicon-edit\"></span> Edit
                                         </a>
                                     </td>";
                         }
-                                 echo "</tr>";
+                        echo "</tr>";
                     }
                     echo "</tbody>
                         </table>";
