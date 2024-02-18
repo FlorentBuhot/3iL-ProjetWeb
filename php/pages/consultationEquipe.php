@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <?php
+    include_once("php/template/inc_head.php");
+    ?>
+    <title>Consultation d'une équipe</title>
+</head>
+<body class="container">
+<?php
+include_once("php/template/inc_header.php");
+?>
+
+
+<h1 class="mt-5">Équipe : LE NOM DE L'ÉQUIPE</h1>
+
+<form>
+    <div class="input-group input-group-lg mt-3">
+        <span class="input-group-text" id="inputGroup-sizing-lg">Nom de l'équipe :</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-lg" readonly>
+    </div>
+    <br/>
+    <div class="input-group input-group-lg">
+        <span class="input-group-text" id="inputGroup-sizing-lg">Alias de l'équipe :</span>
+        <input type="text" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-lg" readonly>
+    </div>
+
+    </div>
+    <div class="row mt-4">
+        <h2>Détail de l'équipe</h2>
+        <div class="col-md-6">
+            <div>
+                <br/>
+                <label for="start">Joueur 1 :</label>
+                <select class="form-select" aria-label="Default select" disabled>
+                    <option selected>Choisissez un joueur</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div>
+                <br/>
+                <label for="start">Joueur 2 :</label>
+                <select class="form-select" aria-label="Default select" disabled>
+                    <option selected>Choisissez un joueur</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div>
+                <br/>
+                <label for="start">Joueur 3 :</label>
+                <select class="form-select" aria-label="Default select" disabled>
+                    <option selected>Choisissez un joueur</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <br/>
+                <label for="start">Joueur 2 :</label>
+                <select class="form-select" aria-label="Default select" disabled>
+                    <option selected>Choisissez un joueur</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div>
+                <br/>
+                <label for="start">Joueur 3 :</label>
+                <select class="form-select" aria-label="Default select" disabled>
+                    <option selected>Choisissez un joueur</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
