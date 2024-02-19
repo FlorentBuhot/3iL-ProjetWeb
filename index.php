@@ -26,14 +26,21 @@ $routes['/pageConnexion'] = 'php/pages/connexion.php';
 $routes['/inscription'] = 'php/controllers/traiterInscription.php';
 $routes['/pageInscription'] = 'php/pages/inscription.php';
 $routes['/deconnexion'] = 'php/pages/connexion.php';
+$routes['/modifierUtilisateur'] = 'php/controllers/modifierUtilisateur.php';
+$routes['/profil'] = 'php/pages/informationUtilisateur.php';
 
 // Récupérer l'URL demandée et la méthode HTTP depuis $_SERVER
 $action = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
 
 // TO DO : virer ce truc
-if ($action === "/pass") {
+/*if ($action === "/pass") {
     redirect("php/utiles/genPassword.php");
+    exit();
+}*/
+
+if ($action === "/deni") {
+    redirect("php/pages/informationUtilisateur.php");
     exit();
 }
 
@@ -45,6 +52,12 @@ if ($requestMethod === 'GET') {
 if ($action === '/deconnexion'){
     session_destroy();
     redirect($routes['/deconnexion']);
+    exit();
+} elseif ($action === "/profil") {
+    redirect($routes['/profil']);
+    exit();
+} elseif ($action === "/modifierUtilisateur") {
+    redirect($routes['/modifierUtilisateur']);
     exit();
 }
 
