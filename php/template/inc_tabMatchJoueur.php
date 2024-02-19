@@ -54,24 +54,8 @@
                                     <td>" . $nomEquipe1[0]['nom'] . " </td>
                                     <td>" . $nomEquipe2[0]['nom'] . " </td>
                                     <td>" . $match["date_match"] . " " . $match["heure_match"] . "</td>
-                                    <td>" . $match["score_equipe_1"] . "-". $match["score_equipe_2"] ."</td>";
-                        if ($_SESSION['role'] == 'organisateur') {
-                            echo "<td>
-                                        <a href=\"pageModifMatch?id_match=" . $match["id_match"] .
-                                "&nom_match=" . $match["nom_match"] .
-                                "&description_match=" . $match["description_match"] .
-                                "&id_equipe_1=" . $match["id_equipe_1"] .
-                                "&id_equipe_2=" . $match["id_equipe_2"] .
-                                "&date_match=" . $match["date_match"] .
-                                "&heure_match=" . $match["heure_match"] .
-                                "&score_equipe_1=" . $match["score_equipe_1"] .
-                                "&score_equipe_2=" . $match["score_equipe_2"] . "\" 
-                                        class=\"btn btn-info btn-lg\">
-                                            <span class=\"glyphicon glyphicon-edit\"></span> Edit
-                                        </a>
-                                    </td>";
-                        }
-                        echo "</tr>";
+                                    <td>" . $match["score_equipe_1"] . "-". $match["score_equipe_2"] ."</td>
+                              </tr>";
                     }
                     echo "</tbody>
                         </table>";

@@ -5,10 +5,9 @@
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <!-- Logo -->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/home">
             <img src="/img/ballon.png" alt="Logo" width="50" height="50"
                  class="d-inline-block align-text-top">
-
         </a>
 
         <!-- Nom de site-->
