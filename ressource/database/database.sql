@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql
--- Généré le : lun. 19 fév. 2024 à 14:33
+-- Généré le : lun. 19 fév. 2024 à 15:49
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.8
 
@@ -50,26 +50,26 @@ INSERT INTO `equipe` (`equipe_id`, `nom`, `alias`) VALUES
 CREATE TABLE `joueur` (
   `joueur_id` int NOT NULL,
   `user_id` int NOT NULL,
-  `nom` varchar(50) NOT NULL,
-  `prenom` varchar(50) NOT NULL,
-  `nb_match` int NOT NULL,
-  `nb_but` int NOT NULL,
-  `nb_arret` int NOT NULL,
-  `nb_passe_de` int NOT NULL,
-  `score` int NOT NULL
+  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `prenom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `nb_match` int NOT NULL DEFAULT '0',
+  `nb_but` int NOT NULL DEFAULT '0',
+  `nb_arret` int NOT NULL DEFAULT '0',
+  `nb_passe_de` int NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `joueur`
 --
 
-INSERT INTO `joueur` (`joueur_id`, `user_id`, `nom`, `prenom`, `nb_match`, `nb_but`, `nb_arret`, `nb_passe_de`, `score`) VALUES
-(1, 1, 'admin', 'admin', 0, 0, 0, 0, 0),
-(2, 2, 'deni', 'denii', 0, 0, 0, 0, 0),
-(3, 6, 'test', 'test', 0, 0, 0, 0, 0),
-(4, 7, 'Hugo', 'BARTE', 0, 0, 0, 0, 0),
-(5, 8, 'Thomas', 'ADUGARD', 0, 0, 0, 0, 0),
-(8, 9, 'Maxime', 'BOISSOUT', 0, 0, 0, 0, 0);
+INSERT INTO `joueur` (`joueur_id`, `user_id`, `nom`, `prenom`, `nb_match`, `nb_but`, `nb_arret`, `nb_passe_de`) VALUES
+(1, 1, 'admin', 'admin', 1, 0, 0, 0),
+(2, 2, 'deni', 'dance', 0, 0, 0, 0),
+(3, 6, 'test', 'test', 0, 0, 0, 0),
+(4, 7, 'Hugo', 'BARTE', 0, 0, 0, 0),
+(5, 8, 'Thomas', 'ADUGARD', 0, 0, 0, 0),
+(8, 9, 'Maxime', 'BOISSOUT', 0, 0, 0, 0),
+(9, 14, 'Nicolas', 'coppa', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -119,7 +119,7 @@ CREATE TABLE `matchs` (
 
 INSERT INTO `matchs` (`id_match`, `nom_match`, `date_match`, `heure_match`, `description_match`, `id_equipe_1`, `id_equipe_2`, `score_equipe_1`, `score_equipe_2`, `login`) VALUES
 (1, 'finale 3iL', '2024-02-21', '16:30:00', 'c\'est la finle', 1, 2, 0, 0, 'admin@3il.fr'),
-(2, '1er tour coupe de viennes', '2024-02-24', '15:15:00', 'c\'est coupe', 2, 1, 0, 0, 'deni@3il.fr');
+(2, '1er tour coupe de vienne', '2024-02-24', '15:30:00', 'c\'est coupe', 2, 1, 0, 0, 'deni@3il.fr');
 
 -- --------------------------------------------------------
 
@@ -145,7 +145,8 @@ INSERT INTO `user` (`user_id`, `login`, `password`, `role`) VALUES
 (6, 'test', '$2y$10$B/Yc7uJe727oX4HDr3br1ebNXYN.21coIf4b6l8VGQZ8IFzGmYEW.', 'joueur'),
 (7, 'hugo@3il.fr', '$2y$10$gWW9wxnKqX1GkCvA7flEK.lKWCKLsBLZi1sV4THkiRdYcKp9Wp1QC', 'joueur'),
 (8, 'toto@3il.fr', '$2y$10$dCmRrgS6zfObpG6OHsAXWOAdNlTmdDkBazfnQ2EkB7m/KWoxHu73q', 'joueur'),
-(9, 'max@3il.fr', '$2y$10$uUlaw0Kpxw4dbHc05IKZXOda1fG6QZL4hfhGxxD6wkyDTLs9mt.Cm', 'joueur');
+(9, 'max@3il.fr', '$2y$10$uUlaw0Kpxw4dbHc05IKZXOda1fG6QZL4hfhGxxD6wkyDTLs9mt.Cm', 'joueur'),
+(14, 'nico@3il.fr', '$2y$10$sb5Ehks7U4IwyW6P7P7mHe5LI6igpxnaH4TIL6/7r5wBPvTmRlxjO', 'joueur');
 
 --
 -- Index pour les tables déchargées
@@ -200,7 +201,7 @@ ALTER TABLE `equipe`
 -- AUTO_INCREMENT pour la table `joueur`
 --
 ALTER TABLE `joueur`
-  MODIFY `joueur_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `joueur_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `joueur_equipe`
@@ -218,7 +219,7 @@ ALTER TABLE `matchs`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Contraintes pour les tables déchargées
