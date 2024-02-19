@@ -50,7 +50,7 @@ include_once("php/template/inc_header.php");
                                 <th scope=\"col\"></th>
                             </tr>
                             </thead>
-                            <tbody>*";
+                            <tbody>";
                     foreach ($tabmatch as $match) {
                         $texteReq = "select nom ";
                         $texteReq .= "from equipe ";
