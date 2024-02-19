@@ -16,10 +16,14 @@ $routes['/organisateur'] = 'php/pages/organisateur.php';
 $routes['/pageCreationMatch'] = 'php/pages/creationMatch.php';
 $routes['/pageModifMatch'] = 'php/pages/modif/modifMatch.php';
 $routes['/modifierMatch'] = 'php/controllers/modifierMatch.php';
+$routes['/pageModifStatMatch'] = 'php/pages/modif/modifStatMatch.php';
+$routes['/modifierStatMatch'] = 'php/controllers/modifierStatMatch.php';
 
 // Joueur routes
 $routes['/joueur'] = 'php/pages/joueur.php';
 $routes['/pageEquipe'] = 'php/pages/equipe.php';
+$routes['/homeJoueur'] = 'php/pages/joueur.php';
+
 
 // Other routes
 $routes['/connexion'] = 'php/controllers/traiterIdentification.php';
@@ -29,22 +33,11 @@ $routes['/pageInscription'] = 'php/view/inscription.php';
 $routes['/deconnexion'] = 'php/view/connexion.php';
 $routes['/modifierProfil'] = 'php/controllers/modifierProfil.php';
 $routes['/pageModifProfil'] = 'php/pages/modif/modifProfil.php';
-$routes['/pageEquipe'] = 'php/pages/equipe.php';
+
 
 // Récupérer l'URL demandée et la méthode HTTP depuis $_SERVER
 $action = $_SERVER['REQUEST_URI'];
 $requestMethod = $_SERVER['REQUEST_METHOD'];
-
-// TO DO : virer ce truc
-/*if ($action === "/pass") {
-    redirect("php/utiles/genPassword.php");
-    exit();
-}*/
-
-if ($action === "/deni") {
-    redirect("php/pages/modifProfil.php");
-    exit();
-}
 
 if ($requestMethod === 'GET') {
     $totalRequest = explode("?", $action);
@@ -135,6 +128,12 @@ function organisateur($action, $routes)
         case '/infoProfil':
             redirect($routes['/infoProfil']);
             exit();
+        case '/pageModifStatMatch':
+            redirect($routes['/pageModifStatMatch']);
+            exit();
+        case '/modifierStatMatch':
+            redirect($routes['/modifierStatMatch']);
+            exit();
         default:
             redirect($routes['/organisateur']);
             break;
@@ -150,8 +149,10 @@ function joueur($action, $routes)
         case '/pageEquipe':
             redirect($routes['/pageEquipe']);
             break;
+        default:
+            redirect($routes['/homeJoueur']);
+            exit();
     }
-    redirect("php/pages/joueur.php");
 }
 
 function redirect($route)

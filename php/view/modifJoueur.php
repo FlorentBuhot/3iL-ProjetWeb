@@ -24,8 +24,8 @@
         </div>
 
         <div class="form-group">
-            <label for="nb_match">Nombre de match :</label>
-            <input required type="number" class="form-control" id="nb_match" name="nb_match" min="0" value="<?php echo $joueur['nb_match']?>">
+            <label>Nombre de match :</label>
+            <input readonly type="number" class="form-control" min="0" value="<?php echo $nbMatchJoueur[0]['count(*)']?>">
         </div>
 
         <div class="form-group">
@@ -44,8 +44,8 @@
         </div>
 
         <div class="form-group">
-            <label for="score">Score :</label>
-            <input readonly type="number" class="form-control" min="0" value="<?php echo $joueur['score']?>">
+            <label>Score :</label>
+            <input readonly type="number" class="form-control" min="0" value="<?php echo $score?>">
         </div>
 
         <input hidden id="joueur_id" name="joueur_id" value="<?php echo $joueur['joueur_id']?>">

@@ -14,17 +14,17 @@
 </head>
 <body class="container">
 <div id="login_form">
-    <div id="block-connect">
-        <p class="text-danger">
-            <?php
-            if (isset($_GET['msg'])) {
-                echo $_GET['msg'];
-            }
-            ?>
-        </p>
-    </div>
     <form class="p-5" action="/connexion" method="post">
         <h1 class="fw-bold">S'identifier</h1>
+        <div id="block-connect">
+            <p class="text-danger">
+                <?php
+                if (isset($_GET['msg'])) {
+                    echo $_GET['msg'];
+                }
+                ?>
+            </p>
+        </div>
         <div class="form-group">
             <input class="form-control mb-2 p-2" id="inLogin" name="login" type="text"
                    placeholder="Saisissez votre adresse email">

@@ -12,6 +12,7 @@ require_once("php/template/inc_connexionBase.php");
 //             pas nécessairement une bonne pratique
 //----------------------------------------------------------------------------------
 
+
 // Pas reçues, ou "vide" : on sort
 if (empty($_REQUEST['login']) || empty($_REQUEST['pass'])){
     header('Location:pageConnexion?msg=Champ manquant');
@@ -36,7 +37,7 @@ $requete->execute();
 $tabRes = $requete->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($tabRes) != 1 || !password_verify($pass, $tabRes[0]["password"])) {
-    header('Location:/connexion?msg=Login ou mot de passe incorrect');
+    header('Location:/pageConnexion?msg=Login ou mot de passe incorrect');
     exit();
 }
 

@@ -1,46 +1,16 @@
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <title>Modification d'un utilisateur</title>
-        <?php
-        include_once("php/template/inc_head.php");
-        ?>
-    </head>
-    <body>
-    <div class="container mt-5">
-        <?php
-        include_once("php/template/inc_header.php");
-        ?>
-        <h1 class="mb-4">Modification d'un utilisateur</h1>
-        <form action="/modifierUser" method="post">
-            <div class="form-group">
-                <label for="login">Login :</label>
-                <input required type="text" class="form-control" id="login" name="login" value="<?php echo $_REQUEST['login']?>">
-            </div>
-            <p class="text-danger">
-                <?php
-                if (isset($_GET['msg'])) {
-                    echo $_GET['msg'];
-                }
-                ?>
-            </p>
+<?php
+require_once("php/template/inc_connexionBase.php");
 
-            <div class="form-group">
-                <label for="role">Rôle :</label>
-                <input required type="text" class="form-control" id="role" name="role" value="<?php echo $_REQUEST['role']?>">
-                <?php
-                if (isset($_REQUEST['msgRole'])) {
-                    echo "<div class=\"text-danger\">"
-                            . $_REQUEST['msgRole'] .
-                         "</div>";
-                }
-                ?>
+$userId = $_REQUEST['user_id'];
 
-            </div>
+$texteReq = "select * ";
+$texteReq .= "from user ";
+$texteReq .= "where user_id = :user_id ";
 
-            <input hidden id="user_id" name="user_id" value="<?php echo $_REQUEST['user_id']?>">
-            <button type="submit" class="btn btn-primary mt-4">Modifier</button>
-        </form>
-    </div>
-    </body>
-</html>
+//demander la creation de la requete à l'instance PDO ($cnx)
+$requete = $cnx->prepare($texteReq);
+$requete->bindParam(':user_id', $userId);
+$requete->execute();
+$user = $requete->fetchAll(PDO::FETCH_ASSOC)[0];
+
+include_once("php/view/modifUser.php");
