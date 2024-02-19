@@ -65,7 +65,7 @@
                                 "&heure_match=" . $match["heure_match"] .
                                 "&score_equipe_1=" . $match["score_equipe_1"] .
                                 "&score_equipe_2=" . $match["score_equipe_2"] . "\" 
-                                        class=\"btn btn-info btn-lg\">**
+                                        class=\"btn btn-info btn-lg\">
                                             <span class=\"glyphicon glyphicon-edit\"></span> Edit
                                         </a>
                                     </td>";
