@@ -22,7 +22,7 @@
             </span>
             <img src="/img/personne.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
             <ul class="dropdown-menu" style="left: 92% !important">
-                <li><button class="dropdown-item" onclick="location.href='/profil'">Mes informations</button></li>
+                <li><button class="dropdown-item" onclick="location.href='/pageModifProfil'">Mes informations</button></li>
                 <li><button class="dropdown-item" onclick="location.href='/deconnexion'">Déconnexion</button></li>
             </ul>
         </li>

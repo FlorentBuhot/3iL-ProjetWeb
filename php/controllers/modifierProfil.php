@@ -22,9 +22,9 @@ try {
     $requete->execute();
     $tabRes = $requete->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    header("Location:deni");
+    header("Location:pageModifProfil");
     exit();
 }
 
-header("Location:deni");
+header("Location:pageModifProfil");
 exit();

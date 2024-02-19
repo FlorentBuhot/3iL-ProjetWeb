@@ -4,7 +4,7 @@
     <?php
     include_once("php/template/inc_head.php");
     ?>
-    <title>Profil</title>
+    <title>Mon profil</title>
 </head>
 <body class="container">
 <?php
@@ -13,6 +13,10 @@ include_once("php/template/inc_header.php");
 
 
 <h1 class="mt-5">Utilisateur : <?php echo $tabJoueur[0]["nom"] . " " . $tabJoueur[0]["prenom"] ?></h1>
+<div class="d-flex justify-content-center">
+    <button class="btn btn-success mt-4" onclick="location.href='/home'">Retourner à l'accueil</button>
+</div>
+<form action="/modifierProfil" method="post">
     <div class="input-group input-group-lg mt-3">
         <span class="input-group-text" id="inputGroup-sizing-lg">Login :</span>
         <input type="text" class="form-control" aria-label="Sizing example input"
@@ -53,8 +57,8 @@ include_once("php/template/inc_header.php");
         <input type="text" class="form-control" aria-label="Sizing example input"
                aria-describedby="inputGroup-sizing-lg" readonly value="<?php echo $tabJoueur[0]["nb_passe_de"] ?>">
     </div>
-    <div class="d-flex justify-content-center">
-        <button class="btn btn-success mt-4" onclick="location.href='/home'">Retourner à l'accueil</button>
-    </div>
+    <input hidden value="<?php echo $currentJoueur[0]['joueur_id'] ?>" name="joueur_id">
+    <button type="submit" class="btn btn-success mt-4">Enregistrer</button><br/><br/>
+</form>
 </body>
 </html>

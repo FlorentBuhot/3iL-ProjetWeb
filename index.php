@@ -6,30 +6,29 @@ $routes = [];
 
 // Admin routes
 $routes['/admin'] = 'php/pages/admin.php';
-$routes['/pageModifUser'] = 'php/pages/modifUser.php';
-$routes['/pageModifJoueur'] = 'php/pages/modifJoueur.php';
+$routes['/pageModifUser'] = 'php/pages/modif/modifUser.php';
+$routes['/pageModifJoueur'] = 'php/pages/modif/modifJoueur.php';
 $routes['/modifierJoueur'] = 'php/controllers/modifierJoueur.php';
 $routes['/modifierUser'] = 'php/controllers/modifierUser.php';
 
 // Organisateur routes
 $routes['/organisateur'] = 'php/pages/organisateur.php';
 $routes['/pageCreationMatch'] = 'php/pages/creationMatch.php';
-$routes['/pageModifMatch'] = 'php/pages/modifMatch.php';
+$routes['/pageModifMatch'] = 'php/pages/modif/modifMatch.php';
 $routes['/modifierMatch'] = 'php/controllers/modifierMatch.php';
 
 // Joueur routes
 $routes['/joueur'] = 'php/pages/joueur.php';
 $routes['/pageEquipe'] = 'php/pages/equipe.php';
-$routes['/infoProfil'] = 'php/pages/informationUtilisateur.php';
 
 // Other routes
 $routes['/connexion'] = 'php/controllers/traiterIdentification.php';
-$routes['/pageConnexion'] = 'php/pages/connexion.php';
+$routes['/pageConnexion'] = 'php/view/connexion.php';
 $routes['/inscription'] = 'php/controllers/traiterInscription.php';
-$routes['/pageInscription'] = 'php/pages/inscription.php';
-$routes['/deconnexion'] = 'php/pages/connexion.php';
-$routes['/modifierUtilisateur'] = 'php/controllers/modifierUtilisateur.php';
-$routes['/profil'] = 'php/pages/informationUtilisateur.php';
+$routes['/pageInscription'] = 'php/view/inscription.php';
+$routes['/deconnexion'] = 'php/view/connexion.php';
+$routes['/modifierProfil'] = 'php/controllers/modifierProfil.php';
+$routes['/pageModifProfil'] = 'php/pages/modif/modifProfil.php';
 $routes['/pageEquipe'] = 'php/pages/equipe.php';
 
 // Récupérer l'URL demandée et la méthode HTTP depuis $_SERVER
@@ -43,7 +42,7 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 }*/
 
 if ($action === "/deni") {
-    redirect("php/pages/informationUtilisateur.php");
+    redirect("php/pages/modifProfil.php");
     exit();
 }
 
@@ -52,19 +51,20 @@ if ($requestMethod === 'GET') {
     $action = $totalRequest[0];
 }
 
-if ($action === '/deconnexion'){
-    session_destroy();
-    redirect($routes['/deconnexion']);
-    exit();
-} elseif ($action === "/profil") {
-    redirect($routes['/profil']);
-    exit();
-} elseif ($action === "/modifierUtilisateur") {
-    redirect($routes['/modifierUtilisateur']);
-    exit();
-}
-
 if(isset($_SESSION["role"])) {
+    switch ($action) {
+        case $action === '/deconnexion':
+            session_destroy();
+            redirect($routes['/deconnexion']);
+            exit();
+        case $action === "/pageModifProfil":
+            redirect($routes['/pageModifProfil']);
+            exit();
+        case $action === "/modifierProfil":
+            redirect($routes['/modifierProfil']);
+            exit();
+    }
+
     switch ($_SESSION["role"]) {
         case 'admin':
             admin($action, $routes);

@@ -14,9 +14,10 @@
 
     // Get les match pour ce joueur
     $texteReq = "select * ";
-    $texteReq .= "from matchs ";
-    $texteReq .= "where id_equipe_1 = (select equipe_id from equipe where (id_joueur1 = :id_joueur or id_joueur2 = :id_joueur or id_joueur3 = :id_joueur or id_joueur4 = :id_joueur or id_joueur5 = :id_joueur)) ";
-    $texteReq .= "or id_equipe_2 = (select equipe_id from equipe where (id_joueur1 = :id_joueur or id_joueur2 = :id_joueur or id_joueur3 = :id_joueur or id_joueur4 = :id_joueur or id_joueur5 = :id_joueur))";
+    $texteReq .= "from matchs m ";
+    $texteReq .= "inner join equipe e on e.equipe_id = m.id_equipe_1 or e.equipe_id = m.id_equipe_2 ";
+    $texteReq .= "inner join joueur j on j.joueur_id = :id_joueur ";
+    $texteReq .= "inner join joueur_equipe je on je.equipe_id = e.equipe_id  and je.joueur_id = j.joueur_id";
 
     //demander la creation de la requete à l'instance PDO ($cnx)
     $requete = $cnx->prepare($texteReq);

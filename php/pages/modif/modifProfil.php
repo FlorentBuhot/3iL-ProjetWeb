@@ -35,15 +35,16 @@
     // Get le nombre de match pour ce joueur
     $texteReq = "select count(*) ";
     $texteReq .= "from matchs ";
-    $texteReq .= "where id_equipe_1 = (select equipe_id from equipe where (id_joueur1 = :id_joueur or id_joueur2 = :id_joueur or id_joueur3 = :id_joueur or id_joueur4 = :id_joueur or id_joueur5 = :id_joueur)) ";
-    $texteReq .= "or id_equipe_2 = (select equipe_id from equipe where (id_joueur1 = :id_joueur or id_joueur2 = :id_joueur or id_joueur3 = :id_joueur or id_joueur4 = :id_joueur or id_joueur5 = :id_joueur))";
-
+    $texteReq .= "inner join joueur_equipe je on je.joueur_id = :id_joueur";
 
     $requete = $cnx->prepare($texteReq);
     $requete->bindParam(':id_joueur', $currentJoueur[0]['joueur_id']);
     $requete->execute();
     $nbMatchJoueur = $requete->fetchAll(PDO::FETCH_ASSOC);
 
-    $score = ($tabJoueur[0]["nb_but"] * 100 + $tabJoueur[0]["nb_arret"] * 75 + $tabJoueur[0]["nb_passe_de"] * 50) / $nbMatchJoueur[0]['count(*)'];
-
-    require_once("php/view/profil.php");
+    if ($nbMatchJoueur[0]['count(*)'] === 0) {
+        $score = 0;
+    } else {
+        $score = ($tabJoueur[0]["nb_but"] * 100 + $tabJoueur[0]["nb_arret"] * 75 + $tabJoueur[0]["nb_passe_de"] * 50) / $nbMatchJoueur[0]['count(*)'];
+    }
+    require_once("php/view/modifProfil.php");

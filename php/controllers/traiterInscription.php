@@ -42,8 +42,23 @@ $requete = $cnx->prepare($textReq);
 $requete->bindParam(":login",$login);
 $requete->bindParam(":password", $password_hash);
 $requete->bindParam(":role", $organisateur);
+$requete->execute();
 
-$requete->execute(); // A ne pas oublier...
+$textReq = "select user_id ";
+$textReq.= "from user ";
+$textReq.= "where login = :login";
+
+$requete = $cnx->prepare($textReq);
+$requete->bindParam(":login",$login);
+$requete->execute();
+$user = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+$textReq = "insert into joueur (user_id) values ";
+$textReq .= "(:user_id)";
+
+$requete = $cnx->prepare($textReq);
+$requete->bindParam(":user_id", $user[0]['user_id']);
+$requete->execute();
 
 header("location:pageConnexion"); // rediriger vers la page de connexion
 exit();

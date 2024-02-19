@@ -51,8 +51,8 @@
                         $nomEquipe2 = $requete->fetchAll(PDO::FETCH_ASSOC);
                         echo "<tr>
                                     <td>" . $match["nom_match"] . "</td>
-                                    <td>" . $nomEquipe1[0]['nom'] . " </td>
-                                    <td>" . $nomEquipe2[0]['nom'] . " </td>
+                                    <td><a href='/pageEquipe?equipe_id=". $match['id_equipe_1'] ."'>" . $nomEquipe1[0]['nom'] . " </a></td>
+                                    <td><a href='/pageEquipe?equipe_id=". $match['id_equipe_2'] ."'>" . $nomEquipe2[0]['nom'] . " </a></td>
                                     <td>" . $match["date_match"] . " " . $match["heure_match"] . "</td>
                                     <td>" . $match["score_equipe_1"] . "-". $match["score_equipe_2"] ."</td>
                               </tr>";
