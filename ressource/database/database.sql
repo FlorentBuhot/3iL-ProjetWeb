@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : mysql
--- Généré le : dim. 18 fév. 2024 à 16:47
+-- Généré le : lun. 19 fév. 2024 à 12:56
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.8
 
@@ -97,8 +97,8 @@ CREATE TABLE `matchs` (
 --
 
 INSERT INTO `matchs` (`id_match`, `nom_match`, `date_match`, `heure_match`, `description_match`, `id_equipe_1`, `id_equipe_2`, `score_equipe_1`, `score_equipe_2`, `login`) VALUES
-(1, 'finale 3il', '2024-02-21', '16:34:08', 'c\'est la finle', 1, 2, 0, 0, 'admin@3il.fr'),
-(2, '1er tour coupe de vienne', '2024-02-24', '12:44:58', 'c\'est coupe', 2, 1, 0, 0, 'deni@3il.fr');
+(1, 'finale 3iL', '2024-02-21', '16:30:00', 'c\'est la finle', 1, 2, 0, 0, 'admin@3il.fr'),
+(2, '1er tour coupe de vienne', '2024-02-24', '15:15:00', 'c\'est coupe', 2, 1, 0, 0, 'deni@3il.fr');
 
 -- --------------------------------------------------------
 
