@@ -9,17 +9,16 @@ $heure_match = $_REQUEST['heure_match'];
 $description_match = $_REQUEST['description_match'];
 $id_equipe_1 = $_REQUEST['id_equipe_1'];
 $id_equipe_2 = $_REQUEST['id_equipe_2'];
-$login = $_REQUEST['login'];
 
 // Vérifier que les équipes sélectionnées sont différentes
 if ($id_equipe_1 == $id_equipe_2) {
-    header("Location: pageModifMatch.php?id_match=$id_match&nom_match=$nom_match&date_match=$date_match&heure_match=$heure_match&description_match=$description_match&id_equipe_1=$id_equipe_1&id_equipe_2=$id_equipe_2&login=$login&msg=Les équipes doivent être différentes");
+    header("Location: pageModifMatch.php?id_match=$id_match&nom_match=$nom_match&date_match=$date_match&heure_match=$heure_match&description_match=$description_match&id_equipe_1=$id_equipe_1&id_equipe_2=$id_equipe_2&msg=Les équipes doivent être différentes");
     exit();
 }
 
 $texteReq = "UPDATE matchs ";
 $texteReq .= "SET nom_match = :nom_match, date_match = :date_match, heure_match = :heure_match, description_match = :description_match, ";
-$texteReq .= "id_equipe_1 = :id_equipe_1, id_equipe_2 = :id_equipe_2, login = :login ";
+$texteReq .= "id_equipe_1 = :id_equipe_1, id_equipe_2 = :id_equipe_2 ";
 $texteReq .= "WHERE id_match = :id_match";
 
 // Préparation de la requête
@@ -31,16 +30,17 @@ $requete->bindParam(':heure_match', $heure_match);
 $requete->bindParam(':description_match', $description_match);
 $requete->bindParam(':id_equipe_1', $id_equipe_1);
 $requete->bindParam(':id_equipe_2', $id_equipe_2);
-$requete->bindParam(':login', $login);
 
-try {
+// Exécution de la requête
+$requete->execute();
+/* try {
     // Exécution de la requête
     $requete->execute();
 } catch (PDOException $e) {
-    header("Location: pageModifMatch.php?id_match=$id_match&nom_match=$nom_match&date_match=$date_match&heure_match=$heure_match&description_match=$description_match&id_equipe_1=$id_equipe_1&id_equipe_2=$id_equipe_2&login=$login&msg=Erreur avec la base de données");
+    header("Location: pageModifMatch.php?id_match=$id_match&nom_match=$nom_match&date_match=$date_match&heure_match=$heure_match&description_match=$description_match&id_equipe_1=$id_equipe_1&id_equipe_2=$id_equipe_2&msg=Erreur avec la base de données");
     exit();
-}
+} */
 
 // Redirection vers une page de confirmation
-header("Location:organisateur");
+header("Location:organisateur?confirm=true");
 exit();
