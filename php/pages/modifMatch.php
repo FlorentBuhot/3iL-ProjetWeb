@@ -16,7 +16,9 @@ $tabEquipes = $requete->fetchAll(PDO::FETCH_ASSOC);
 <div class="container">
 
     <h1 class="mt-5">Modification d'un match</h1>
-
+    <?php if (isset($_REQUEST['msg']))
+        echo '<div class="alert alert-danger" role="alert">' . $_REQUEST['msg'] . '</div>';
+    ?>
     <form method="post" action="/modifierMatch">
         <input type="text" value="<?php echo $_REQUEST['id_match']; ?>"
                name="id_match" class="form-control" aria-label="Sizing example input"

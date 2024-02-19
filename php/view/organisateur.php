@@ -11,7 +11,16 @@
 include_once("php/template/inc_header.php");
 ?>
 
-<br/><br/>
+<br/>
+<?php
+    $confirmationMessage = 'Les modifications ont été enregistrées avec succès.';
+    if (isset($_REQUEST['confirmModifMatch']) && $_REQUEST['confirmModifMatch']) {
+        echo '<div class="alert alert-success" role="alert">';
+        echo '<i class="fas fa-check-circle"></i>';
+        echo $confirmationMessage;
+        echo '</div>';
+    }
+?>
 
 <div class="accordion" id="accordionOrganisateur">
     <div class="accordion-item">
