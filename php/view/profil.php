@@ -12,9 +12,9 @@ include_once("php/template/inc_header.php");
 ?>
 
 
-<h1 class="mt-5">Utilisateur : LE NOM DE L'UTILISATEUR</h1>
+<h1 class="mt-5">Utilisateur : <?php echo $tabJoueur[0]["nom"] . " " . $tabJoueur[0]["prenom"] ?></h1>
 <div class="d-flex justify-content-center">
-    <button type="submit" class="btn btn-success mt-4">Retourner à l'accueil</button>
+    <button class="btn btn-success mt-4" onclick="location.href='/home'">Retourner à l'accueil</button>
 </div>
 <form action="/modifierUtilisateur" method="post">
     <div class="input-group input-group-lg mt-3">

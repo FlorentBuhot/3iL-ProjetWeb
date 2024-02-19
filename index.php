@@ -19,6 +19,8 @@ $routes['/modifierMatch'] = 'php/controllers/modifierMatch.php';
 
 // Joueur routes
 $routes['/joueur'] = 'php/pages/joueur.php';
+$routes['/pageEquipe'] = 'php/pages/equipe.php';
+$routes['/infoProfil'] = 'php/pages/informationUtilisateur.php';
 
 // Other routes
 $routes['/connexion'] = 'php/controllers/traiterIdentification.php';
@@ -28,6 +30,7 @@ $routes['/pageInscription'] = 'php/pages/inscription.php';
 $routes['/deconnexion'] = 'php/pages/connexion.php';
 $routes['/modifierUtilisateur'] = 'php/controllers/modifierUtilisateur.php';
 $routes['/profil'] = 'php/pages/informationUtilisateur.php';
+$routes['/pageEquipe'] = 'php/pages/equipe.php';
 
 // Récupérer l'URL demandée et la méthode HTTP depuis $_SERVER
 $action = $_SERVER['REQUEST_URI'];
@@ -123,17 +126,31 @@ function organisateur($action, $routes)
         case '/pageModifMatch':
             redirect($routes['/pageModifMatch']);
             break;
+        case '/pageEquipe':
+            redirect($routes['/pageEquipe']);
+            break;
         case '/modifierMatch':
             redirect($routes['/modifierMatch']);
             break;
+        case '/infoProfil':
+            redirect($routes['/infoProfil']);
+            exit();
         default:
             redirect($routes['/organisateur']);
             break;
     }
 }
 
-function joueur($request, $routes)
+function joueur($action, $routes)
 {
+    switch($action) {
+        case '/infoProfil':
+            redirect($routes['/infoProfil']);
+            exit();
+        case '/pageEquipe':
+            redirect($routes['/pageEquipe']);
+            break;
+    }
     redirect("php/pages/joueur.php");
 }
 
