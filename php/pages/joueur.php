@@ -19,10 +19,19 @@
     $texteReq .= "inner join joueur j on j.joueur_id = :id_joueur ";
     $texteReq .= "inner join joueur_equipe je on je.equipe_id = e.equipe_id  and je.joueur_id = j.joueur_id";
 
-    //demander la creation de la requete à l'instance PDO ($cnx)
+    // Récupérer les équipes du joueurs
     $requete = $cnx->prepare($texteReq);
     $requete->bindParam(':id_joueur', $currentJoueur[0]['joueur_id']);
     $requete->execute();
     $matchJoueur = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+    $texteReq = "select * ";
+    $texteReq .= "from equipe e ";
+    $texteReq .= "inner join joueur_equipe je on e.equipe_id = je.equipe_id and je.joueur_id = :joueur_id";
+
+    $requete = $cnx->prepare($texteReq);
+    $requete->bindParam(':joueur_id', $currentJoueur[0]['joueur_id']);
+    $requete->execute();
+    $equipes = $requete->fetchAll(PDO::FETCH_ASSOC);
 
     include_once("php/view/joueur.php");

@@ -23,7 +23,10 @@ $routes['/modifierStatMatch'] = 'php/controllers/modifierStatMatch.php';
 $routes['/joueur'] = 'php/pages/joueur.php';
 $routes['/pageEquipe'] = 'php/pages/equipe.php';
 $routes['/homeJoueur'] = 'php/pages/joueur.php';
-
+$routes['/pageCreerEquipe'] = 'php/pages/creationEquipe.php';
+$routes['/creerEquipe'] = 'php/controllers/creerEquipe.php';
+$routes['/pageModifEquipe'] = 'php/pages/modif/modifEquipe.php';
+$routes['/modifierEquipe'] = 'php/controllers/modifierEquipe.php';
 
 // Other routes
 $routes['/connexion'] = 'php/controllers/traiterIdentification.php';
@@ -42,6 +45,11 @@ $requestMethod = $_SERVER['REQUEST_METHOD'];
 if ($requestMethod === 'GET') {
     $totalRequest = explode("?", $action);
     $action = $totalRequest[0];
+}
+
+if ($action === '/rechercheJoueur') {
+    redirect('php/controllers/rechercherJoueur.php');
+    exit();
 }
 
 if(isset($_SESSION["role"])) {
@@ -148,6 +156,18 @@ function joueur($action, $routes)
             exit();
         case '/pageEquipe':
             redirect($routes['/pageEquipe']);
+            break;
+        case '/pageCreerEquipe':
+            redirect($routes['/pageCreerEquipe']);
+            break;
+        case '/creerEquipe':
+            redirect($routes['/creerEquipe']);
+            break;
+        case '/pageModifEquipe':
+            redirect($routes['/pageModifEquipe']);
+            break;
+        case '/modifierEquipe':
+            redirect($routes['/modifierEquipe']);
             break;
         default:
             redirect($routes['/homeJoueur']);
