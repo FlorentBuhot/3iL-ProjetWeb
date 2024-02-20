@@ -15,6 +15,7 @@ $routes['/modifierUser'] = 'php/controllers/modifierUser.php';
 $routes['/organisateur'] = 'php/pages/organisateur.php';
 $routes['/pageCreationMatch'] = 'php/pages/creationMatch.php';
 $routes['/pageModifMatch'] = 'php/pages/modif/modifMatch.php';
+$routes['/creerMatch'] = 'php/controllers/creerMatch.php';
 $routes['/modifierMatch'] = 'php/controllers/modifierMatch.php';
 $routes['/pageModifStatMatch'] = 'php/pages/modif/modifStatMatch.php';
 $routes['/modifierStatMatch'] = 'php/controllers/modifierStatMatch.php';
@@ -129,6 +130,9 @@ function organisateur($action, $routes)
             break;
         case '/pageEquipe':
             redirect($routes['/pageEquipe']);
+            break;
+        case '/creerMatch':
+            redirect($routes['/creerMatch']);
             break;
         case '/modifierMatch':
             redirect($routes['/modifierMatch']);

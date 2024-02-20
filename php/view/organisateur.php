@@ -20,6 +20,14 @@ include_once("php/template/inc_header.php");
         echo $confirmationMessage;
         echo '</div>';
     }
+
+    $confirmationMessage = 'L\'ajout a été réalisé avec succès.';
+    if (isset($_REQUEST['confirmCreationMatch']) && $_REQUEST['confirmCreationMatch']) {
+        echo '<div class="alert alert-success" role="alert">';
+        echo '<i class="fas fa-check-circle"></i>';
+        echo $confirmationMessage;
+        echo '</div>';
+    }
 ?>
 
 <div class="accordion" id="accordionOrganisateur">
@@ -41,7 +49,7 @@ include_once("php/template/inc_header.php");
                         <!--Espacement-->
                     </div>
                     <div class="col-md-3">
-                        <form action="/php/pages/creationMatch.php">
+                        <form action="/pageCreationMatch">
                             <button class="btn btn-success w-50" type="submit">Créer un match</button>
                         </form>
                     </div>
