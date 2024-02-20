@@ -16,24 +16,24 @@ require_once("php/template/inc_header.php");
 
     <form action="/modifierStatMatch" method="post">
         <div class="input-group input-group-lg mt-3">
-            <span class="input-group-text" id="inputGroup-sizing-lg">Nom du match :</span>
+            <span class="input-group-text" id="inputGroup-sizing-lg">Nom du match : <?php echo $match['nom']?></span>
             <input type="text" class="form-control" aria-label="Sizing example input"
                    aria-describedby="inputGroup-sizing-lg" readonly>
         </div>
         <br/>
         <div class="input-group input-group-lg mt-3">
-            <span class="input-group-text" id="inputGroup-sizing-lg">Date du match :</span>
+            <span class="input-group-text" id="inputGroup-sizing-lg">Date du match : <?php echo $match['date_match'] ." ". $match['heure_match']?></span>
             <input type="date" class="form-control" id="start-match" name="match-start"
                    aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" readonly>
         </div>
 
         <div class="row mt-4">
             <div class="col-md-6">
-                <h2>Équipe : NOM DE L'ÉQUIPE</h2>
+                <h2>Équipe : <?php echo $equipes[0]['nom']?></h2>
 
                 <div>
                     <br/>
-                    <h4>Joueur 1 (AFFICHE LE NOM)</h4>
+                    <h4>Joueur 1 : </h4>
 
                     <div class="input-group input-group-md mt-3">
                         <span class="input-group-text" id="inputGroup-sizing-lg">Nombre de but :</span>
