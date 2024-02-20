@@ -17,7 +17,7 @@ $textReq.= "where equipe_id = :equipe_id";
 $requete = $cnx->prepare($textReq);
 $requete->bindParam(':nom', $nom);
 $requete->bindParam(':alias', $alias);
-$requete->bindParam(':equipe_id', $equipe_id);
+$requete->bindParam(':equipe_id', $equipeId);
 $requete->execute();
 
 $textReq = "delete from joueur_equipe ";
