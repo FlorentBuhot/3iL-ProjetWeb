@@ -1,7 +1,3 @@
-<?php
-    require_once("php/template/inc_head.php");
-?>
-
 <nav class="navbar navbar-dark bg-dark">
     <div class="container-fluid">
         <!-- Logo -->

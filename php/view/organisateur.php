@@ -90,22 +90,26 @@ include_once("php/template/inc_header.php");
                                     <td><a href='/pageEquipe?equipe_id=". $match['id_equipe_1'] ."'>" . $nomEquipe1[0]['nom'] . " </a></td>
                                     <td><a href='/pageEquipe?equipe_id=". $match['id_equipe_2'] ."'>" . $nomEquipe2[0]['nom'] . " </a></td>
                                     <td>" . $match["date_match"] . " " . $match["heure_match"] . "</td>
-                                    <td>" . $match["score_equipe_1"] . "-". $match["score_equipe_2"] ."</td>
-                                    <td>
+                                    <td>" . $match["score_equipe_1"] . "-". $match["score_equipe_2"] ."</td>";
+                        if ($match['isTerminer'] == 0) {
+                            echo "<td>
                                         <a href=\"pageModifMatch?id_match=" . $match["id_match"] .
-                                            "&nom_match=" . $match["nom_match"] .
-                                            "&description_match=" . $match["description_match"] .
-                                            "&id_equipe_1=" . $match["id_equipe_1"] .
-                                            "&id_equipe_2=" . $match["id_equipe_2"] .
-                                            "&date_match=" . $match["date_match"] .
-                                            "&heure_match=" . $match["heure_match"] .
-                                            "&score_equipe_1=" . $match["score_equipe_1"] .
-                                            "&score_equipe_2=" . $match["score_equipe_2"] . "\" 
+                                "&nom_match=" . $match["nom_match"] .
+                                "&description_match=" . $match["description_match"] .
+                                "&id_equipe_1=" . $match["id_equipe_1"] .
+                                "&id_equipe_2=" . $match["id_equipe_2"] .
+                                "&date_match=" . $match["date_match"] .
+                                "&heure_match=" . $match["heure_match"] .
+                                "&score_equipe_1=" . $match["score_equipe_1"] .
+                                "&score_equipe_2=" . $match["score_equipe_2"] . "\" 
                                         class=\"btn btn-info btn-lg\">
                                             <span class=\"glyphicon glyphicon-edit\"></span> Edit
                                         </a>
-                                    </td>
-                                 </tr>";
+                                    </td>";
+                        } else {
+                            echo "<td></td>";
+                        }
+                        echo "</tr>";
                     }
                     echo "</tbody>
                         </table>";
