@@ -3,13 +3,8 @@ require_once("php/template/inc_verif_match_orga.php");
 
 $matchId = $_REQUEST['match_id'];
 
-$texteReq = "update matchs ";
-$texteReq .= "set isTerminer = 1 ";
-$texteReq .= "where id_match = :id_match ";
-
-$requete = $cnx->prepare($texteReq);
-$requete->bindParam(':id_match', $matchId);
-$requete->execute();
+$scoreA = 0;
+$scoreB = 0;
 
 for ($i = 0; $i < 10; $i++) {
     $joueurId = $_REQUEST['joueur'.$i.'_id'];
@@ -52,7 +47,23 @@ for ($i = 0; $i < 10; $i++) {
     $requete->bindParam(':nb_arret', $joueurNbArretTotal);
     $requete->bindParam(':nb_passe_de', $joueurNbPasseDeTotal);
     $requete->execute();
+
+    if ($i <= 4) {
+        $scoreA = $scoreA + $joueurNbBut;
+    } else {
+        $scoreB = $scoreB + $joueurNbBut;
+    }
 }
+
+$texteReq = "update matchs ";
+$texteReq .= "set isTerminer = 1, score_equipe_1 = :score1, score_equipe_2 = :score2 ";
+$texteReq .= "where id_match = :id_match ";
+
+$requete = $cnx->prepare($texteReq);
+$requete->bindParam(':id_match', $matchId);
+$requete->bindParam(':score1', $scoreA);
+$requete->bindParam(':score2', $scoreB);
+$requete->execute();
 
 header("Location:organisateur");
 exit();

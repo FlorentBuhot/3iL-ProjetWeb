@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="mt-2 w-10">
-            <button class="btn btn-success w-100 g-recaptcha" type="submit">S'identifier</button>
+            <button class="btn btn-success w-100 g-recaptcha" type="submit">S'inscrire</button>
         </div>
         <p>Vous avez un compte ? <a class="style_a" href="/pageConnexion">Se connecter</a></p>
     </form>
