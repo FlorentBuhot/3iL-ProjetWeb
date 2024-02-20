@@ -41,7 +41,7 @@ include_once("php/template/inc_header.php");
                         <!--Espacement-->
                     </div>
                     <div class="col-md-3">
-                        <form action="/php/pages/creationMatch.php">
+                        <form action="/pageCreationMatch">
                             <button class="btn btn-success w-50" type="submit">Créer un match</button>
                         </form>
                     </div>
